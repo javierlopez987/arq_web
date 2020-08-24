@@ -1,0 +1,8 @@
+/bin/
+/target/
+/MyDerbyDB/
+/.settings/
+*.classpath
+*.project
+derby.log
+pom.xml
