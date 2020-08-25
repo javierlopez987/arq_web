@@ -17,10 +17,10 @@ public class BaseDeDatos {
 			e1.printStackTrace();
 		}
 		
-		String uri = "jdbc:mysql://localhost:3306/db_casino";
+		String uri = "jdbc:mysql://localhost:3306/db_arq_web";
 		
 		try {
-			Connection conn = DriverManager.getConnection(uri);
+			Connection conn = DriverManager.getConnection(uri, "root", "");
 			conn.setAutoCommit(false);
 			createTables(conn);
 			addPerson(conn, 1, "Inés", 20);
