@@ -4,13 +4,13 @@ import java.util.Collection;
 
 public interface DAOPersona {
 	
-	int insertPersona(String nombre, int edad);
+	int insertPersona(Persona p);
 	
-	boolean deletePersona(int id);
+	boolean deletePersona(Persona p);
 	
-	Persona findPersona(int id);
+	Persona findPersona(Persona p);
 	
-	boolean updatePersona(Persona alguien);
+	boolean updatePersona(Persona p);
 	
 	Collection<Persona> selectPersonas(int edad);
 }
