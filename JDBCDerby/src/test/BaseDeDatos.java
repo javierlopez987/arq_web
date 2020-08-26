@@ -1,16 +1,24 @@
 package test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import org.apache.derby.jdbc.EmbeddedDriver;
-
 public class BaseDeDatos {
 
 	public static void main(String[] args) {
-		new EmbeddedDriver();
+		String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+		
+		try {
+			Class.forName(driver).getConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(1);
+		}
 		
 		String uri = "jdbc:derby:MyDerbyDB;create=true";
 		
