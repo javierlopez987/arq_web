@@ -1,4 +1,4 @@
-package test;
+package dev;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
