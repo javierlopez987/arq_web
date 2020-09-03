@@ -23,7 +23,7 @@ public class MySQLDB {
 		}
 		
 		try {
-			conn = DriverManager.getConnection(URI, "root", "");
+			conn = DriverManager.getConnection(URI, "root", "password");
 			
 			conn.setAutoCommit(false);
 			
