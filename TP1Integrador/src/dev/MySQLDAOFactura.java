@@ -19,14 +19,12 @@ public class MySQLDAOFactura implements DAOFactura{
 	private void builtTable() throws SQLException {
 		String tableStmt = "CREATE TABLE IF NOT EXISTS factura ("
 				+ "idFactura INTEGER, idCliente INTEGER, "
-				+ "PRIMARY KEY(idFactura), "
-				+ "FOREIGN KEY(idCliente) REFERENCES cliente(idCliente))";
+				+ "PRIMARY KEY(idFactura))";
 		conn.prepareStatement(tableStmt).execute();
+		conn.commit();
 		
 		tableStmt = "CREATE TABLE IF NOT EXISTS factura_producto (" 
-				+ "idFactura INTEGER, idProducto INTEGER, cantidad INTEGER, " 
-				+ "FOREIGN KEY(idFactura) REFERENCES factura(idFactura), "
-				+ "FOREIGN KEY(idProducto) REFERENCES factura(idProducto))";
+				+ "idFactura INTEGER, idProducto INTEGER, cantidad INTEGER)";
 		conn.prepareStatement(tableStmt).execute();
 		conn.commit();
 	}
@@ -71,6 +69,21 @@ public class MySQLDAOFactura implements DAOFactura{
 	public Collection<Factura> selectFacturas() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void insertFacturaProducto(Factura f, Producto p, int cantidad) {
+		try {
+			String insertStmt = "INSERT INTO factura-producto (idFactura, idProducto, cantidad) VALUES (?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(insertStmt);
+			ps.setInt(1, f.getIdFactura());
+			ps.setInt(2, p.getIdProducto());
+			ps.setInt(3, cantidad);
+			ps.executeUpdate();
+			ps.close();
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

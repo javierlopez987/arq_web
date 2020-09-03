@@ -30,7 +30,7 @@ public class Factura {
 		this.cliente = cliente;
 	}
 
-	public void addProducto(Producto p) {
+	public int addProducto(Producto p) {
 		int cant = 1;
 		
 		if(productos.containsKey(p)) {
@@ -39,6 +39,8 @@ public class Factura {
 		} else {
 			productos.put(p, cant);
 		}
+		
+		return cant;
 	}
 	
 	public void removeProducto(Producto p) {

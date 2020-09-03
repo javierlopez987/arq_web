@@ -9,23 +9,27 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 public class Programa {
+	public static DAOCliente clienteDAO;
+	public static DAOFactura facturaDAO;
+	public static DAOProducto productoDAO;
 
 	public static void main(String[] args) {
 		DAOFactory mysqlFactory = DAOFactory.getDAOFactory();
 
-		DAOCliente clienteDAO = mysqlFactory.getDAOCliente();
+		clienteDAO = mysqlFactory.getDAOCliente();
+		productoDAO = mysqlFactory.getDAOProducto();
+		facturaDAO = mysqlFactory.getDAOFactura();
 		
-		cargarClientes(clienteDAO);
+		//cargarClientes();
+		//cargarProductos();
+		//cargarFacturas();
+		cargarFacturasProductos();
 
 		Collection<Cliente> clientes = clienteDAO.selectClientes();
 
 		for (Cliente p : clientes) {
 			System.out.println(p);
 		}
-		
-		DAOProducto productoDAO = mysqlFactory.getDAOProducto();
-		
-		cargarProductos(productoDAO);
 		
 		Collection<Producto> producto = productoDAO.selectProducto();
 
@@ -37,7 +41,7 @@ public class Programa {
 	
 	
 
-	public static void cargarClientes(DAOCliente clienteDAO) {
+	public static void cargarClientes() {
 		String path = "csv/clientes.csv";
 		
 		CSVParser parser;
@@ -57,7 +61,7 @@ public class Programa {
 		}
 	}
 
-	public static void cargarProductos(DAOProducto productoDAO) {
+	public static void cargarProductos() {
 		String path = "csv/productos.csv";
 		
 		CSVParser parser;
@@ -77,21 +81,44 @@ public class Programa {
 		}
 	}	
 	
-	public static void leerCSV(String path) {
+	public static void cargarFacturas() {
+		String path = "csv/facturas.csv";
+		
 		CSVParser parser;
 		try {
 			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
 
 			for (CSVRecord row : parser) {
-				for (String e : row) {
-					System.out.print(e);
-				}
-				System.out.println();
+				int idFactura = new Integer(row.get("idFactura"));
+				int idCliente = new Integer(row.get("idCliente"));
+				Cliente cliente = clienteDAO.findCliente(idCliente);
+				Factura factura = new Factura(idFactura, cliente);
+				facturaDAO.insertFactura(factura);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public static void cargarFacturasProductos() {
+		String path = "csv/facturas-productos.csv";
+		
+		CSVParser parser;
+		try {
+			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
 
+			for (CSVRecord row : parser) {
+				int idFactura = new Integer(row.get("idFactura"));
+				int idProducto = new Integer(row.get("idProducto"));
+				int cant = new Integer(row.get("cantidad"));
+				Producto producto = productoDAO.findProducto(idProducto);
+				Factura factura = facturaDAO.findFactura(idFactura);
+				facturaDAO.insertFacturaProducto(factura, producto, cant);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

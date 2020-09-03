@@ -12,4 +12,6 @@ public interface DAOFactura {
 	boolean updateFactura(Factura p);
 	
 	Collection<Factura> selectFacturas();
+	
+	void insertFacturaProducto(Factura f, Producto p, int cantidad);
 }

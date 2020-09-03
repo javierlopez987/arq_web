@@ -18,4 +18,9 @@ public class MySQLDAOFactory extends DAOFactory {
 		return new MySQLDAOProducto();
 	}
 
+	@Override
+	public DAOFactura getDAOFactura() {
+		return new MySQLDAOFactura();
+	}
+
 }
