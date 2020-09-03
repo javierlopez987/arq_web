@@ -34,7 +34,7 @@ public class MySQLDAOCliente implements DAOCliente{
 		try {
 			String insertStmt = "INSERT INTO cliente (id, nombre, email) VALUES (?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(insertStmt);
-			ps.setInt(1, p.getId());
+			ps.setInt(1, p.getIdCliente());
 			ps.setString(2, p.getNombre());
 			ps.setString(3, p.getEmail());
 			result = ps.executeUpdate();

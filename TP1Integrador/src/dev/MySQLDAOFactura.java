@@ -37,9 +37,8 @@ public class MySQLDAOFactura implements DAOFactura{
 		try {
 			String insertStmt = "INSERT INTO factura (idFactura, idCliente) VALUES (?, ?)";
 			PreparedStatement ps = conn.prepareStatement(insertStmt);
-			ps.setInt(1, f.getIdFactura()());
-			ps.setString(2, f.getCliente());
-			ps.setString(3, f.getEmail());
+			ps.setInt(1, f.getIdFactura());
+			ps.setInt(2, f.getCliente());
 			result = ps.executeUpdate();
 			ps.close();
 			conn.commit();

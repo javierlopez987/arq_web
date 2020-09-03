@@ -23,7 +23,7 @@ public class Factura {
 	}
 
 	public int getCliente() {
-		return cliente.getId();
+		return cliente.getIdCliente();
 	}
 
 	public void setCliente(Cliente cliente) {

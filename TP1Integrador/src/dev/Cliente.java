@@ -11,11 +11,11 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public int getId() {
+	public int getIdCliente() {
 		return idCliente;
 	}
 
-	public void setId(int idCliente) {
+	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
 
