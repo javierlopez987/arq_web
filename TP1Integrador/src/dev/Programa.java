@@ -22,8 +22,20 @@ public class Programa {
 		for (Cliente p : clientes) {
 			System.out.println(p);
 		}
+		
+		DAOProducto productoDAO = mysqlFactory.getDAOProducto();
+		
+		cargarProductos(productoDAO);
+		
+		Collection<Producto> producto = productoDAO.selectProducto();
 
+		for (Producto p : producto) {
+			System.out.println(p);
+		}
+		
 	}
+	
+	
 
 	public static void cargarClientes(DAOCliente clienteDAO) {
 		String path = "csv/clientes.csv";
@@ -45,6 +57,26 @@ public class Programa {
 		}
 	}
 
+	public static void cargarProductos(DAOProducto productoDAO) {
+		String path = "csv/productos.csv";
+		
+		CSVParser parser;
+		try {
+			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
+
+			for (CSVRecord row : parser) {
+				int idProducto = new Integer(row.get("idProducto"));
+				String nombre = row.get("nombre");
+				float valor = new Float(row.get("valor"));
+				Producto producto = new Producto(idProducto, nombre, valor);
+				productoDAO.insertProducto(producto);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
+	
 	public static void leerCSV(String path) {
 		CSVParser parser;
 		try {

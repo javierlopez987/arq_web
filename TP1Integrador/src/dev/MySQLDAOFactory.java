@@ -12,5 +12,10 @@ public class MySQLDAOFactory extends DAOFactory {
 	public DAOCliente getDAOCliente() {
 		return new MySQLDAOCliente();
 	}
+	
+	@Override
+	public DAOProducto getDAOProducto() {
+		return new MySQLDAOProducto();
+	}
 
 }
