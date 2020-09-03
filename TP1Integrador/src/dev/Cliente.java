@@ -1,22 +1,22 @@
 package dev;
 
 public class Cliente {
-	private int id;
+	private int idCliente;
 	private String nombre;
 	private String email;
 	
-	public Cliente(int id, String nombre, String email) {
-		this.id = id;
+	public Cliente(int idCliente, String nombre, String email) {
+		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.email = email;
 	}
 
 	public int getId() {
-		return id;
+		return idCliente;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getNombre() {
@@ -36,6 +36,6 @@ public class Cliente {
 	}
 
 	public String toString() {
-		return " id: " + this.id + " Nombre: " + this.nombre + " Email: " + this.email;
+		return " idCliente: " + this.idCliente + " Nombre: " + this.nombre + " Email: " + this.email;
 	}
 }

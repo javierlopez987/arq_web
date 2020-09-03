@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class MySQLDB {
 	public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	public static final String URI = "jdbc:mysql://localhost:3306/";
-	public static final String SCHEMA = "db_arq_web_test";
+	public static final String SCHEMA = "db_arq_web";
 	private Connection conn;
 	private static MySQLDB instance = new MySQLDB();
 
