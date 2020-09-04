@@ -20,23 +20,27 @@ public class Programa {
 		productoDAO = mysqlFactory.getDAOProducto();
 		facturaDAO = mysqlFactory.getDAOFactura();
 		
-		//cargarClientes();
-		//cargarProductos();
-		//cargarFacturas();
-		//cargarFacturasProductos();
-
-//		Collection<Cliente> clientes = clienteDAO.selectClientes();
-//
-//		for (Cliente p : clientes) {
-//			System.out.println(p);
-//		}
-//		
-//		Collection<Producto> producto = productoDAO.selectProducto();
-//
-//		for (Producto p : producto) {
-//			System.out.println(p);
-//		}
+		Collection<Cliente> clientes = clienteDAO.selectClientes();
+		if(clientes.isEmpty()) {
+			cargarClientes();
+		}
+		Collection<Producto> productos = productoDAO.selectProducto();
+		if(productos.isEmpty()) {
+			cargarProductos();			
+		}
 		
+		Collection<Factura> facturas = facturaDAO.selectFacturas();
+		if(facturas.isEmpty()) {
+			cargarFacturas();
+			cargarFacturasProductos();			
+		}
+		
+		try {
+			mysqlFactory.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

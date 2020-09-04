@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class MySQLDAOFactura implements DAOFactura{
@@ -90,8 +91,22 @@ public class MySQLDAOFactura implements DAOFactura{
 
 	@Override
 	public Collection<Factura> selectFacturas() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<Factura> result = new ArrayList<Factura>();
+		String select = "SELECT * FROM factura";
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement(select);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Cliente cliente = clienteDAO.findCliente(rs.getInt(2));
+				Factura f = new Factura(rs.getInt(1), cliente);
+				result.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	@Override
 	public void insertFacturaProducto(Factura f, Producto p, int cantidad) {
