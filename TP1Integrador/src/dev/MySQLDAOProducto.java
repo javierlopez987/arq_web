@@ -56,7 +56,7 @@ public class MySQLDAOProducto implements DAOProducto{
 	@Override
 	public Producto findProducto(int id) {
 		Producto result = null;
-		String select = "SELECT * FROM producto WHERE id = ?";
+		String select = "SELECT * FROM producto WHERE idProducto = ?";
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(select);

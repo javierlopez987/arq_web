@@ -23,19 +23,19 @@ public class Programa {
 		//cargarClientes();
 		//cargarProductos();
 		//cargarFacturas();
-		cargarFacturasProductos();
+		//cargarFacturasProductos();
 
-		Collection<Cliente> clientes = clienteDAO.selectClientes();
-
-		for (Cliente p : clientes) {
-			System.out.println(p);
-		}
-		
-		Collection<Producto> producto = productoDAO.selectProducto();
-
-		for (Producto p : producto) {
-			System.out.println(p);
-		}
+//		Collection<Cliente> clientes = clienteDAO.selectClientes();
+//
+//		for (Cliente p : clientes) {
+//			System.out.println(p);
+//		}
+//		
+//		Collection<Producto> producto = productoDAO.selectProducto();
+//
+//		for (Producto p : producto) {
+//			System.out.println(p);
+//		}
 		
 	}
 	

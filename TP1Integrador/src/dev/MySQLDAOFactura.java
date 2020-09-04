@@ -2,11 +2,13 @@ package dev;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
 public class MySQLDAOFactura implements DAOFactura{
 	private Connection conn;
+	private DAOCliente clienteDAO;
 	
 	public MySQLDAOFactura() {
 		conn = MySQLDAOFactory.createConnection();
@@ -15,19 +17,26 @@ public class MySQLDAOFactura implements DAOFactura{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		clienteDAO = new MySQLDAOCliente();
 	}
 	private void builtTable() throws SQLException {
+		
 		String tableStmt = "CREATE TABLE IF NOT EXISTS factura ("
 				+ "idFactura INTEGER, idCliente INTEGER, "
-				+ "PRIMARY KEY(idFactura))";
+				+ "PRIMARY KEY(idFactura), "
+				+ "FOREIGN KEY (idCliente) REFERENCES cliente(idCliente))";
 		conn.prepareStatement(tableStmt).execute();
 		conn.commit();
 		
 		tableStmt = "CREATE TABLE IF NOT EXISTS factura_producto (" 
-				+ "idFactura INTEGER, idProducto INTEGER, cantidad INTEGER)";
+				+ "idFactura INTEGER, idProducto INTEGER, cantidad INTEGER, "
+				+ "FOREIGN KEY (idFactura) REFERENCES factura(idFactura), "
+				+ "FOREIGN KEY (idProducto) REFERENCES producto(idProducto))";
 		conn.prepareStatement(tableStmt).execute();
 		conn.commit();
+		
 	}
+	
 	@Override
 	public int insertFactura(Factura f) {
 		int result = -1;
@@ -55,8 +64,22 @@ public class MySQLDAOFactura implements DAOFactura{
 
 	@Override
 	public Factura findFactura(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Factura result = null;
+		String select = "SELECT * FROM factura WHERE idFactura = ?";
+
+		try {
+			PreparedStatement ps = conn.prepareStatement(select);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Cliente cliente = clienteDAO.findCliente(rs.getInt(2));
+				result = new Factura(rs.getInt(1), cliente);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 
 	@Override
@@ -73,7 +96,7 @@ public class MySQLDAOFactura implements DAOFactura{
 	@Override
 	public void insertFacturaProducto(Factura f, Producto p, int cantidad) {
 		try {
-			String insertStmt = "INSERT INTO factura-producto (idFactura, idProducto, cantidad) VALUES (?, ?, ?)";
+			String insertStmt = "INSERT INTO factura_producto(idFactura, idProducto, cantidad) VALUES (?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(insertStmt);
 			ps.setInt(1, f.getIdFactura());
 			ps.setInt(2, p.getIdProducto());
