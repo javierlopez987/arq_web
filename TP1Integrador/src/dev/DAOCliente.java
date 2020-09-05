@@ -8,7 +8,7 @@ public interface DAOCliente {
 	
 	boolean deleteCliente(Cliente p);
 	
-	Cliente findCliente(int id);
+	Cliente findCliente(int idCliente);
 	
 	boolean updateCliente(Cliente p);
 	

@@ -21,8 +21,8 @@ public class MySQLDAOCliente implements DAOCliente{
 
 	private void builtTable() throws SQLException {
 		String tableStmt = "CREATE TABLE IF NOT EXISTS cliente (" + 
-				"id INTEGER, nombre VARCHAR(100), email VARCHAR(100), " + 
-				"PRIMARY KEY(id))";
+				"idCliente INTEGER, nombre VARCHAR(100), email VARCHAR(100), " + 
+				"PRIMARY KEY(idCliente))";
 		conn.prepareStatement(tableStmt).execute();
 		conn.commit();
 	}
@@ -32,7 +32,7 @@ public class MySQLDAOCliente implements DAOCliente{
 		int result = -1;
 
 		try {
-			String insertStmt = "INSERT INTO cliente (id, nombre, email) VALUES (?, ?, ?)";
+			String insertStmt = "INSERT INTO cliente (idCliente, nombre, email) VALUES (?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(insertStmt);
 			ps.setInt(1, p.getIdCliente());
 			ps.setString(2, p.getNombre());
@@ -54,13 +54,13 @@ public class MySQLDAOCliente implements DAOCliente{
 	}
 
 	@Override
-	public Cliente findCliente(int id) {
+	public Cliente findCliente(int idCliente) {
 		Cliente result = null;
-		String select = "SELECT * FROM cliente WHERE id = ?";
+		String select = "SELECT * FROM cliente WHERE idCliente = ?";
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(select);
-			ps.setInt(1, id);
+			ps.setInt(1, idCliente);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				 result = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3));

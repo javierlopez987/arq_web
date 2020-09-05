@@ -1,6 +1,8 @@
 package dev;
 
-public abstract class DAOFactory {
+import java.io.Closeable;
+
+public abstract class DAOFactory implements Closeable {
 	
 	public abstract DAOCliente getDAOCliente();
 	
