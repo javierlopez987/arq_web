@@ -22,5 +22,10 @@ public class MySQLDAOFactory extends DAOFactory {
 	public DAOFactura getDAOFactura() {
 		return new MySQLDAOFactura();
 	}
+	
+	@Override
+	public DAOManager getDAOManager() {
+		return new MySQLDAOManager();
+	}
 
 }

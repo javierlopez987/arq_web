@@ -12,6 +12,7 @@ public class Programa {
 	public static DAOCliente clienteDAO;
 	public static DAOFactura facturaDAO;
 	public static DAOProducto productoDAO;
+	public static DAOManager managerDAO;
 
 	public static void main(String[] args) {
 		DAOFactory mysqlFactory = DAOFactory.getDAOFactory();
@@ -19,6 +20,7 @@ public class Programa {
 		clienteDAO = mysqlFactory.getDAOCliente();
 		productoDAO = mysqlFactory.getDAOProducto();
 		facturaDAO = mysqlFactory.getDAOFactura();
+		managerDAO = mysqlFactory.getDAOManager();
 		
 		//cargarClientes();
 		//cargarProductos();
