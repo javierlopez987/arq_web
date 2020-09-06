@@ -31,6 +31,7 @@ public class MySQLDAOFactura implements DAOFactura{
 		
 		tableStmt = "CREATE TABLE IF NOT EXISTS factura_producto (" 
 				+ "idFactura INTEGER, idProducto INTEGER, cantidad INTEGER, "
+				+ "PRIMARY KEY(idFactura, idProducto), "
 				+ "FOREIGN KEY (idFactura) REFERENCES factura(idFactura), "
 				+ "FOREIGN KEY (idProducto) REFERENCES producto(idProducto))";
 		conn.prepareStatement(tableStmt).execute();
