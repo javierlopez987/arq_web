@@ -13,4 +13,6 @@ public interface DAOProducto {
 	boolean updateProducto(Producto p);
 	
 	Collection<Producto> selectProducto();
+	
+	Producto productoMayorRecaudacion();
 }

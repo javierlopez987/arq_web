@@ -97,4 +97,36 @@ public class MySQLDAOProducto implements DAOProducto{
 		return result;
 	}
 
+	@Override
+	public Producto productoMayorRecaudacion() {
+		Producto result = null;
+		String create = "CREATE VIEW IF NOT EXISTS vw_producto_mayor_recaudacion AS "
+				+ "SELECT p.*, SUM(cantidad) AS cantidad_vendida, SUM(cantidad) * valor AS recaudacion "
+				+ "FROM producto p "
+				+ "INNER JOIN factura_producto fp ON p.idProducto = fp.idProducto "
+				+ "GROUP BY p.idProducto, valor "
+				+ "HAVING SUM(cantidad) * valor "
+				+ "ORDER BY recaudacion DESC "
+				+ "LIMIT 1; ";
+		String select = "SELECT * "
+				+ "FROM vw_producto_mayor_recaudacion; ";
+
+		try {
+			PreparedStatement ps = conn.prepareStatement(create);
+			ps.execute();
+			ps.close();
+			conn.commit();
+			
+			ps = conn.prepareStatement(select);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				 result = new Producto(rs.getInt(1), rs.getString(2), rs.getFloat(3));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 }
