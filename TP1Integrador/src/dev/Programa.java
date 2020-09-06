@@ -35,6 +35,12 @@ public class Programa {
 			cargarFacturasProductos();			
 		}
 		
+		Producto mejorProducto = productoDAO.productoMayorRecaudacion();
+		System.out.println(mejorProducto);
+		
+		Collection<Cliente> mejoresClientes = clienteDAO.clientesMayorFacturacion();
+		System.out.println(mejoresClientes);
+		
 		try {
 			mysqlFactory.close();
 		} catch (IOException e) {
