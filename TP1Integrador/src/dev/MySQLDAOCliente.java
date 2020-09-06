@@ -120,7 +120,7 @@ public class MySQLDAOCliente implements DAOCliente{
 	@Override
 	public Collection<Cliente> clientesMayorFacturacion() {
 		Collection<Cliente> result = new ArrayList<Cliente>();
-		String createView = "CREATE VIEW IF NOT EXISTS vw_factura_importe_total AS "
+		String createView = "CREATE OR REPLACE VIEW vw_factura_importe_total AS "
 				+ "SELECT f.*, SUM(cantidad * valor) AS total_factura "
 				+ "FROM factura f "
 				+ "INNER JOIN factura_producto fp ON f.idFactura = fp.idFactura "
@@ -129,7 +129,7 @@ public class MySQLDAOCliente implements DAOCliente{
 				+ "HAVING SUM(cantidad * valor) "
 				+ "ORDER BY total_factura DESC; ";
 		
-		String createView2 = "CREATE VIEW IF NOT EXISTS vw_clientes_mayor_facturacion AS "
+		String createView2 = "CREATE OR REPLACE VIEW vw_clientes_mayor_facturacion AS "
 				+ "SELECT c.*, SUM(total_factura) AS total_facturado "
 				+ "FROM cliente c "
 				+ "INNER JOIN vw_factura_importe_total f ON c.idCliente = f.idCliente "

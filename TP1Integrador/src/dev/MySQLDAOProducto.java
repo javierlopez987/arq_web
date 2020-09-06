@@ -106,7 +106,7 @@ public class MySQLDAOProducto implements DAOProducto{
 	@Override
 	public Producto productoMayorRecaudacion() {
 		Producto result = null;
-		String create = "CREATE VIEW IF NOT EXISTS vw_producto_mayor_recaudacion AS "
+		String create = "CREATE OR REPLACE VIEW vw_producto_mayor_recaudacion AS "
 				+ "SELECT p.*, SUM(cantidad) AS cantidad_vendida, SUM(cantidad) * valor AS recaudacion "
 				+ "FROM producto p "
 				+ "INNER JOIN factura_producto fp ON p.idProducto = fp.idProducto "
