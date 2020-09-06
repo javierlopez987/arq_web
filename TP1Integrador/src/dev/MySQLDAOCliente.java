@@ -97,4 +97,51 @@ public class MySQLDAOCliente implements DAOCliente{
 		return result;
 	}
 
+	@Override
+	public Collection<Cliente> clientesMayorFacturacion() {
+		Collection<Cliente> result = new ArrayList<Cliente>();
+		String createView = "CREATE VIEW IF NOT EXISTS vw_factura_importe_total AS "
+				+ "SELECT f.*, SUM(cantidad * valor) AS total_factura "
+				+ "FROM factura f "
+				+ "INNER JOIN factura_producto fp ON f.idFactura = fp.idFactura "
+				+ "INNER JOIN producto p ON fp.idProducto = p.idProducto "
+				+ "GROUP BY f.idFactura "
+				+ "HAVING SUM(cantidad * valor) "
+				+ "ORDER BY total_factura DESC; ";
+		
+		String createView2 = "CREATE VIEW IF NOT EXISTS vw_clientes_mayor_facturacion AS "
+				+ "SELECT c.*, SUM(total_factura) AS total_facturado "
+				+ "FROM cliente c "
+				+ "INNER JOIN vw_factura_importe_total f ON c.idCliente = f.idCliente "
+				+ "GROUP BY c.idCliente "
+				+ "HAVING SUM(total_factura) "
+				+ "ORDER BY total_facturado DESC; ";
+		
+		String select = "SELECT * "
+				+ "FROM vw_clientes_mayor_facturacion; ";
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement(createView);
+			ps.execute();
+			ps.close();
+			conn.commit();
+			
+			ps = conn.prepareStatement(createView2);
+			ps.execute();
+			ps.close();
+			conn.commit();
+			
+			ps = conn.prepareStatement(select);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Cliente p = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3));
+				result.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

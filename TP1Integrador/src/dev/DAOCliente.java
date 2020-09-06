@@ -13,4 +13,6 @@ public interface DAOCliente {
 	boolean updateCliente(Cliente p);
 	
 	Collection<Cliente> selectClientes();
+	
+	Collection<Cliente> clientesMayorFacturacion();
 }
