@@ -18,7 +18,9 @@ public class MySQLDAOProducto implements DAOProducto{
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Función que crea la tabla producto, si no existe, en la BD.
+	 */
 	private void builtTable() throws SQLException {
 		String tableStmt = "CREATE TABLE IF NOT EXISTS producto (" + 
 				"idProducto INTEGER, nombre VARCHAR(100), valor DOUBLE, " + 
@@ -97,6 +99,10 @@ public class MySQLDAOProducto implements DAOProducto{
 		return result;
 	}
 
+	/**
+	 * Retorna el Producto de mayor recaudacion, 
+	 * según información de la BD.
+	 */
 	@Override
 	public Producto productoMayorRecaudacion() {
 		Producto result = null;

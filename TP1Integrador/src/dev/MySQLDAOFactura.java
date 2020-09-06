@@ -20,6 +20,11 @@ public class MySQLDAOFactura implements DAOFactura{
 		}
 		clienteDAO = new MySQLDAOCliente();
 	}
+	
+	/**
+	 * Función que crea la tabla factura, si no existe, en la BD.
+	 * También crea la tabla intermedia de factura_producto, si no existe.
+	 */
 	private void builtTable() throws SQLException {
 		
 		String tableStmt = "CREATE TABLE IF NOT EXISTS factura ("

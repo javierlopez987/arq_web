@@ -20,27 +20,51 @@ public class Programa {
 		productoDAO = mysqlFactory.getDAOProducto();
 		facturaDAO = mysqlFactory.getDAOFactura();
 		
+		/**
+		 * Se cargan los datos de clientes.csv 
+		 * si la tabla en la BD está vacía
+		 */
 		Collection<Cliente> clientes = clienteDAO.selectClientes();
 		if(clientes.isEmpty()) {
 			cargarClientes();
 		}
+		
+		/**
+		 * Se cargan los datos de productos.csv 
+		 * si la tabla en la BD está vacía
+		 */
 		Collection<Producto> productos = productoDAO.selectProducto();
 		if(productos.isEmpty()) {
 			cargarProductos();			
 		}
 		
+		/**
+		 * Se cargan los datos de factura.csv y factura-productos 
+		 * si las tablas en la BD está vacía
+		 */
 		Collection<Factura> facturas = facturaDAO.selectFacturas();
 		if(facturas.isEmpty()) {
 			cargarFacturas();
 			cargarFacturasProductos();			
 		}
 		
+		/**
+		 * Utiliza el servicio que retorna el producto que más recaudó
+		 * y lo imprime por pantalla
+		 */
 		Producto mejorProducto = productoDAO.productoMayorRecaudacion();
 		System.out.println(mejorProducto);
 		
+		/**
+		 * Utiliza el servicio que lista clientes de mayor a menor facturación
+		 * y los imprime por pantalla
+		 */
 		Collection<Cliente> mejoresClientes = clienteDAO.clientesMayorFacturacion();
 		System.out.println(mejoresClientes);
 		
+		/**
+		 * Cierra la conexion a la BD
+		 */
 		try {
 			mysqlFactory.close();
 		} catch (IOException e) {
@@ -50,7 +74,9 @@ public class Programa {
 	}
 	
 	
-
+	/**
+	 * Función que inserta línea por línea los datos de clientes.csv en la BD
+	 */
 	public static void cargarClientes() {
 		String path = "csv/clientes.csv";
 		
@@ -71,6 +97,9 @@ public class Programa {
 		}
 	}
 
+	/**
+	 * Función que inserta línea por línea los datos de productos.csv en la BD
+	 */
 	public static void cargarProductos() {
 		String path = "csv/productos.csv";
 		
@@ -91,6 +120,11 @@ public class Programa {
 		}
 	}	
 	
+	/**
+	 * Función que inserta línea por línea 
+	 * los datos de facturas.csv en la BD
+	 * Se debe ejecutar despues de haber cargado los clientes
+	 */
 	public static void cargarFacturas() {
 		String path = "csv/facturas.csv";
 		
@@ -111,6 +145,11 @@ public class Programa {
 		}
 	}
 	
+	/**
+	 * Función que inserta línea por línea 
+	 * los datos de factura-productos.csv en la BD
+	 * Se debe ejecutar después de cargar los productos, los clientes y las facturas
+	 */
 	public static void cargarFacturasProductos() {
 		String path = "csv/facturas-productos.csv";
 		

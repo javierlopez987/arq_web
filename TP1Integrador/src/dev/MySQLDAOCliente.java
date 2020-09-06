@@ -19,6 +19,9 @@ public class MySQLDAOCliente implements DAOCliente{
 		}
 	}
 
+	/**
+	 * Función que crea la tabla cliente, si no existe, en la BD.
+	 */
 	private void builtTable() throws SQLException {
 		String tableStmt = "CREATE TABLE IF NOT EXISTS cliente (" + 
 				"idCliente INTEGER, nombre VARCHAR(100), email VARCHAR(100), " + 
@@ -27,6 +30,10 @@ public class MySQLDAOCliente implements DAOCliente{
 		conn.commit();
 	}
 
+	/**
+	 * Función que, dado un objeto Cliente,
+	 * persiste sus datos en la BD
+	 */
 	@Override
 	public int insertCliente(Cliente p) {
 		int result = -1;
@@ -53,6 +60,11 @@ public class MySQLDAOCliente implements DAOCliente{
 		return false;
 	}
 
+	/**
+	 * Función que, dado un idCliente por parámetro, 
+	 * retorna una objeto Cliente si existe, o null si no existe,
+	 * con los correspondientes datos contenidos en la BD
+	 */
 	@Override
 	public Cliente findCliente(int idCliente) {
 		Cliente result = null;
@@ -78,6 +90,9 @@ public class MySQLDAOCliente implements DAOCliente{
 		return false;
 	}
 
+	/**
+	 * Retorna una colección de todos los clientes contenidos en la BD.
+	 */
 	@Override
 	public Collection<Cliente> selectClientes() {
 		Collection<Cliente> result = new ArrayList<Cliente>();
@@ -97,6 +112,11 @@ public class MySQLDAOCliente implements DAOCliente{
 		return result;
 	}
 
+	/**
+	 * Función que retorna una lista de clientes de mayor a menor facturación
+	 * Implementación: crea las vistas correspondientes si no existen,
+	 * luego realiza la consulta correspondiente.
+	 */
 	@Override
 	public Collection<Cliente> clientesMayorFacturacion() {
 		Collection<Cliente> result = new ArrayList<Cliente>();

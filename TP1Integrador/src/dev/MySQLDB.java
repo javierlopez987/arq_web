@@ -35,16 +35,25 @@ public class MySQLDB {
 		}
 	}
 	
+	/**
+	 * Crea la base de datos, si no existe.
+	 */
 	private void createDB() throws SQLException {
 		String dbStmt = "CREATE DATABASE IF NOT EXISTS " + SCHEMA;
 		conn.prepareStatement(dbStmt).execute();
 		conn.commit();
 	}
 
+	/**
+	 * Retorna la instancia de este singleton
+	 */
 	public static MySQLDB getInstance() {
 		return instance;
 	}
 	
+	/**
+	 * Retorna la conexion a la DB
+	 */
 	public Connection getConnection() {
 		return conn;
 	}
