@@ -1,8 +1,14 @@
 package tudai.dao.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Persona {
@@ -14,17 +20,31 @@ public class Persona {
 	private int edad;
 	@Column
 	private int dni;
+	@ManyToOne
+	private Direccion domicilio;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "jugadores")
+	private List<Turno> turnos;
 	
 	public Persona() {
 		super();
 	}
 
-	public Persona(int id, String nombre, int edad, int dni) {
+	public Persona(int id, String nombre, int edad, int dni, Direccion domicilio) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.edad = edad;
 		this.dni = dni;
+		this.domicilio = domicilio;
+		this.turnos = new ArrayList<Turno>();
+	}
+
+	public Direccion getDomicilio() {
+		return domicilio;
+	}
+
+	public void setDomicilio(Direccion domicilio) {
+		this.domicilio = domicilio;
 	}
 
 	public String getNombre() {

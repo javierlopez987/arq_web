@@ -3,6 +3,7 @@ package tudai.dao;
 import java.util.Collection;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import tudai.dao.model.Persona;
 
@@ -22,8 +23,21 @@ public class JPADAOPersona implements DAOPersona {
 
 	@Override
 	public boolean deletePersona(Persona p) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted;
+		em.getTransaction().begin();
+		String jpql = "DELETE FROM Persona p WHERE p = ?1";
+		
+		try {
+			Query query = em.createQuery(jpql);
+			query.setParameter(1, p);
+			query.executeUpdate();
+			deleted = true;
+		} catch (Exception e) {
+			deleted = false;
+		}
+		em.getTransaction().commit();
+		
+		return deleted;
 	}
 
 	@Override

@@ -21,12 +21,13 @@ public class MySQLDAOPersona implements DAOPersona {
 		int result = -1;
 
 		try {
-			String insertStmt = "INSERT INTO persona (id, nombre, edad, dni) VALUES (?, ?, ?, ?)";
+			String insertStmt = "INSERT INTO persona (id, nombre, edad, dni, domilicio) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(insertStmt);
 			ps.setInt(1, p.getId());
 			ps.setString(2, p.getNombre());
 			ps.setInt(3, p.getEdad());
 			ps.setInt(4, p.getDni());
+			ps.setInt(4, p.getDomicilio().getId());
 			result = ps.executeUpdate();
 			ps.close();
 			conn.commit();
@@ -53,7 +54,7 @@ public class MySQLDAOPersona implements DAOPersona {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				 result = new Persona(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+				result = new Persona();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +78,7 @@ public class MySQLDAOPersona implements DAOPersona {
 			PreparedStatement ps = conn.prepareStatement(select);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Persona p = new Persona(rs.getInt("id"), rs.getString("nombre"), rs.getInt("edad"), rs.getInt("dni"));
+				Persona p = new Persona();
 				result.add(p);
 			}
 		} catch (SQLException e) {
