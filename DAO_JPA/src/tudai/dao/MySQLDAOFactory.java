@@ -13,4 +13,10 @@ public class MySQLDAOFactory extends DAOFactory {
 		return new MySQLDAOPersona();
 	}
 
+	@Override
+	public DAOTurno getDAOTurno() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

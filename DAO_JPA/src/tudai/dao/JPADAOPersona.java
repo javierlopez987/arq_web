@@ -4,8 +4,9 @@ import java.util.Collection;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-import tudai.dao.model.Persona;
+import tudai.orm.Persona;
 
 public class JPADAOPersona implements DAOPersona {
 	private EntityManager em;
@@ -14,11 +15,18 @@ public class JPADAOPersona implements DAOPersona {
 		this.em = em;
 	}
 	@Override
-	public int insertPersona(Persona p) {
-		em.getTransaction().begin();
-		em.persist(p);;
-		em.getTransaction().commit();
-		return 0;
+	public boolean insertPersona(Persona p) {
+		boolean inserted;
+		try {
+			em.getTransaction().begin();
+			em.persist(p);;
+			em.getTransaction().commit();
+			inserted = true;
+		} catch (Exception e) {
+			System.out.println(e);
+			inserted = false;
+		}
+		return inserted;
 	}
 
 	@Override
@@ -42,23 +50,45 @@ public class JPADAOPersona implements DAOPersona {
 
 	@Override
 	public Persona findPersona(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(Persona.class, id);
 	}
 
 	@Override
 	public boolean updatePersona(Persona p) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean updated;
+		Persona toBeModified = em.find(Persona.class, p.getId());
+		
+		try {
+			em.getTransaction().begin();
+			toBeModified.setNombre(p.getNombre());
+			toBeModified.setEdad(p.getEdad());
+			toBeModified.setDni(p.getDni());
+			toBeModified.setDomicilio(p.getDomicilio());
+			em.getTransaction().commit();
+			updated = true;
+		} catch (Exception e) {
+			System.out.println(e);
+			updated = false;
+		}
+		
+		return updated;
 	}
 
 	@Override
 	public Collection<Persona> selectPersonas() {
+		Collection<Persona> result = null;
+		String jpql = "SELECT p FROM Persona p";
+		
 		em.getTransaction().begin();
-		@SuppressWarnings("unchecked")
-		Collection<Persona> personas = em.createQuery("SELECT p FROM Persona p").getResultList();
+		try {
+			TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);
+			result = query.getResultList();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		em.getTransaction().commit();
-		return personas;
+		
+		return result;
 	}
 
 }

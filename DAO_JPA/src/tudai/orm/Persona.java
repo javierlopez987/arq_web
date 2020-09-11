@@ -1,8 +1,9 @@
-package tudai.dao.model;
+package tudai.orm;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +21,7 @@ public class Persona {
 	private int edad;
 	@Column
 	private int dni;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Direccion domicilio;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "jugadores")
 	private List<Turno> turnos;

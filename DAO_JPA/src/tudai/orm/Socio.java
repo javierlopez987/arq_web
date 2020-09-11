@@ -1,4 +1,4 @@
-package tudai.dao.model;
+package tudai.orm;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

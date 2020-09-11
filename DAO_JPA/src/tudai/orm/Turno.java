@@ -1,10 +1,11 @@
-package tudai.dao.model;
+package tudai.orm;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +21,7 @@ public class Turno {
 	private int id;
 	@Column
 	private Timestamp fecha;
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Persona> jugadores;
 	
 	public Turno() {
@@ -47,6 +48,10 @@ public class Turno {
 
 	public Iterator<Persona> getJugadores() {
 		return jugadores.iterator();
+	}
+	
+	public void addJugador(Persona p) {
+		this.jugadores.add(p);
 	}
 
 	@Override

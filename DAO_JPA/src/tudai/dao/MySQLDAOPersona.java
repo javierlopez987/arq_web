@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import tudai.dao.model.Persona;
+import tudai.orm.Persona;
 
 public class MySQLDAOPersona implements DAOPersona {
 	private Connection conn;
@@ -17,8 +17,8 @@ public class MySQLDAOPersona implements DAOPersona {
 	}
 
 	@Override
-	public int insertPersona(Persona p) {
-		int result = -1;
+	public boolean insertPersona(Persona p) {
+		boolean result;
 
 		try {
 			String insertStmt = "INSERT INTO persona (id, nombre, edad, dni, domilicio) VALUES (?, ?, ?, ?, ?)";
@@ -28,11 +28,13 @@ public class MySQLDAOPersona implements DAOPersona {
 			ps.setInt(3, p.getEdad());
 			ps.setInt(4, p.getDni());
 			ps.setInt(4, p.getDomicilio().getId());
-			result = ps.executeUpdate();
+			ps.executeUpdate();
 			ps.close();
 			conn.commit();
+			result = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			result = false;
 		}
 
 		return result;

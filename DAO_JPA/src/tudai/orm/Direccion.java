@@ -1,4 +1,4 @@
-package tudai.dao.model;
+package tudai.orm;
 
 import java.util.ArrayList;
 import java.util.Iterator;

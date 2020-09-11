@@ -1,11 +1,8 @@
 package tudai.dao;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 /**
  * Clase abstracta DAOFactory
- * @author Win10
+ * @author Javier
  *
  */
 public abstract class DAOFactory {
@@ -13,9 +10,6 @@ public abstract class DAOFactory {
 	public static final int MYSQL = 1;
 	public static final int JPA = 2;
 
-	// Debe haber un método por cada DAO que puede ser creado
-	public abstract DAOPersona getDAOPersona();
-	
 	public static DAOFactory getDAOFactory(int whichFactory) {
 		DAOFactory daoFactory = null;
 		
@@ -32,4 +26,10 @@ public abstract class DAOFactory {
 		}
 		return daoFactory;
 	}
+	
+	// Debe haber un método por cada DAO que puede ser creado
+	public abstract DAOPersona getDAOPersona();
+	
+	public abstract DAOTurno getDAOTurno();
+	
 }

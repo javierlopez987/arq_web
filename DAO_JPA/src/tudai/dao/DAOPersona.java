@@ -2,10 +2,11 @@ package tudai.dao;
 
 import java.util.Collection;
 
-import tudai.dao.model.Persona;
+import tudai.orm.Persona;
 
 public interface DAOPersona {
-	int insertPersona(Persona p);
+	
+	boolean insertPersona(Persona p);
 
 	boolean deletePersona(Persona p);
 

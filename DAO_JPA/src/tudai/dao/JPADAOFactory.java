@@ -9,12 +9,17 @@ public class JPADAOFactory extends DAOFactory{
 	private EntityManager em;
 	public JPADAOFactory() {
 		emf = Persistence.createEntityManagerFactory("DAOJPADemo");
+		em = emf.createEntityManager();
 	}
 	
 	@Override
 	public DAOPersona getDAOPersona() {
-		em = emf.createEntityManager();
 		return new JPADAOPersona(em);
+	}
+
+	@Override
+	public DAOTurno getDAOTurno() {
+		return new JPADAOTurno(em);
 	}
 
 }
