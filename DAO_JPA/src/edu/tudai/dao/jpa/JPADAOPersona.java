@@ -1,4 +1,4 @@
-package tudai.dao;
+package edu.tudai.dao.jpa;
 
 import java.util.Collection;
 
@@ -6,7 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import tudai.orm.Persona;
+import edu.tudai.dao.i.DAOPersona;
+import edu.tudai.pojo.Persona;
 
 public class JPADAOPersona implements DAOPersona {
 	private EntityManager em;

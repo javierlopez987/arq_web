@@ -1,8 +1,12 @@
-package tudai.dao;
+package edu.tudai.dao.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import edu.tudai.dao.i.DAOFactory;
+import edu.tudai.dao.i.DAOPersona;
+import edu.tudai.dao.i.DAOTurno;
 
 public class JPADAOFactory extends DAOFactory{
 	private EntityManagerFactory emf;

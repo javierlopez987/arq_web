@@ -1,4 +1,4 @@
-package tudai.orm;
+package edu.tudai.pojo;
 
 import java.util.ArrayList;
 import java.util.Iterator;

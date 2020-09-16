@@ -1,4 +1,7 @@
-package tudai.dao;
+package edu.tudai.dao.i;
+
+import edu.tudai.dao.jpa.JPADAOFactory;
+import edu.tudai.dao.mysql.MySQLDAOFactory;
 
 /**
  * Clase abstracta DAOFactory

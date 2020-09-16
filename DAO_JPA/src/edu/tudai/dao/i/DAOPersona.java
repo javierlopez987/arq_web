@@ -1,8 +1,8 @@
-package tudai.dao;
+package edu.tudai.dao.i;
 
 import java.util.Collection;
 
-import tudai.orm.Persona;
+import edu.tudai.pojo.Persona;
 
 public interface DAOPersona {
 	

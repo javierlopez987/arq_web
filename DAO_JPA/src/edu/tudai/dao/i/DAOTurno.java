@@ -1,9 +1,9 @@
-package tudai.dao;
+package edu.tudai.dao.i;
 
 import java.util.Collection;
 
-import tudai.orm.Persona;
-import tudai.orm.Turno;
+import edu.tudai.pojo.Persona;
+import edu.tudai.pojo.Turno;
 
 public interface DAOTurno {
 	

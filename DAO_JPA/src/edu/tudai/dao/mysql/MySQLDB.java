@@ -1,4 +1,4 @@
-package tudai.dao;
+package edu.tudai.dao.mysql;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;

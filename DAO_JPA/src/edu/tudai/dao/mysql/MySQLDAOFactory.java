@@ -1,6 +1,10 @@
-package tudai.dao;
+package edu.tudai.dao.mysql;
 
 import java.sql.Connection;
+
+import edu.tudai.dao.i.DAOFactory;
+import edu.tudai.dao.i.DAOPersona;
+import edu.tudai.dao.i.DAOTurno;
 
 public class MySQLDAOFactory extends DAOFactory {
 

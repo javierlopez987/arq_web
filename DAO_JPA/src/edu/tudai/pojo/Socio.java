@@ -1,4 +1,4 @@
-package tudai.orm;
+package edu.tudai.pojo;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

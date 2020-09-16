@@ -1,4 +1,4 @@
-package tudai.dao;
+package edu.tudai.dao.jpa;
 
 import java.util.Collection;
 
@@ -6,8 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import tudai.orm.Persona;
-import tudai.orm.Turno;
+import edu.tudai.dao.i.DAOTurno;
+import edu.tudai.pojo.Persona;
+import edu.tudai.pojo.Turno;
 
 public class JPADAOTurno implements DAOTurno {
 	private EntityManager em;

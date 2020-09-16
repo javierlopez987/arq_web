@@ -1,15 +1,15 @@
-package tudai.dao.demo;
+package edu.tudai.demo;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collection;
 
-import tudai.dao.DAOFactory;
-import tudai.dao.DAOPersona;
-import tudai.dao.DAOTurno;
-import tudai.orm.Direccion;
-import tudai.orm.Persona;
-import tudai.orm.Turno;
+import edu.tudai.dao.i.DAOFactory;
+import edu.tudai.dao.i.DAOPersona;
+import edu.tudai.dao.i.DAOTurno;
+import edu.tudai.pojo.Direccion;
+import edu.tudai.pojo.Persona;
+import edu.tudai.pojo.Turno;
 
 
 public class Programa {

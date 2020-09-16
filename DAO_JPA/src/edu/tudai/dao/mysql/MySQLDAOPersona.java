@@ -1,4 +1,4 @@
-package tudai.dao;
+package edu.tudai.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import tudai.orm.Persona;
+import edu.tudai.dao.i.DAOPersona;
+import edu.tudai.pojo.Persona;
 
 public class MySQLDAOPersona implements DAOPersona {
 	private Connection conn;
