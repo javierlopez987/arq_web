@@ -1,0 +1,101 @@
+id_estudiante,nombre,apellido,edad,genero,nro_lu,dni,residencia
+1,Xantha,Guzman,43,Femenino,31860,31493952,Necochea
+2,Brenna,Hernandez,43,Masculino,17353,8845612,Coronel Suarez
+3,Acton,Caldwell,44,Femenino,48520,31557802,San Cayetano
+4,Stephanie,Sims,39,Femenino,21530,14701554,Tandil
+5,Shafira,Bray,19,Masculino,43004,14670345,Juarez
+6,Gabriel,Duran,25,Femenino,36289,31592289,Chaves
+7,Steel,Blackwell,31,Femenino,36651,19580684,Olavarria
+8,Desirae,Heath,39,Femenino,17392,18429280,Tandil
+9,Yetta,Oneil,30,Femenino,47059,11605769,Bolivar
+10,Henry,Gallegos,20,Masculino,13931,6823515,Chaves
+11,Katelyn,Justice,31,Femenino,19152,40753794,Tandil
+12,Alana,Powell,42,Masculino,13808,18633729,Rauch
+13,Eaton,Hardy,25,Masculino,46146,2636277,Balcarce
+14,Asher,Rodriguez,26,Masculino,26665,8598016,Tandil
+15,Veda,Newton,22,Femenino,48862,7662468,Tres Arroyos
+16,Gage,Hensley,20,Masculino,48020,38705463,Olavarria
+17,Georgia,Dale,38,Masculino,33110,10385257,Bolivar
+18,Zahir,Terrell,33,Femenino,10563,35135137,Bolivar
+19,Iris,Gates,18,Femenino,16820,37939717,Ayacucho
+20,Erin,Nolan,20,Masculino,29856,26668445,Necochea
+21,Neville,Buckley,20,Masculino,31264,28798226,Necochea
+22,Cecilia,Callahan,25,Masculino,43859,21115475,Coronel Suarez
+23,Herman,Gill,41,Femenino,11773,35594222,Las Flores
+24,Gisela,Mueller,27,Femenino,31113,27569919,Ayacucho
+25,Halee,Brown,35,Masculino,28247,37992806,Loberia
+26,Graham,Chavez,43,Femenino,23698,3314401,Necochea
+27,Candace,Knight,35,Masculino,34787,23641632,San Cayetano
+28,Emery,Landry,25,Femenino,28222,40854084,Loberia
+29,Aurora,Talley,21,Femenino,27594,40714959,Las Flores
+30,Jolie,Johnston,24,Femenino,34179,22122868,Tandil
+31,Adria,Harrison,30,Masculino,31291,9193332,Azul
+32,Lani,Norman,33,Masculino,12287,32349956,Necochea
+33,Hop,Camacho,40,Femenino,17060,8594165,Olavarria
+34,Pandora,Chambers,45,Masculino,11198,2490802,Azul
+35,Roth,Franks,23,Masculino,29493,4133421,San Cayetano
+36,Stewart,Leach,45,Masculino,48625,6817589,Necochea
+37,Owen,Wells,21,Femenino,10718,8035790,Juarez
+38,Kieran,Mckee,24,Femenino,23052,41360058,Olavarria
+39,Devin,Cervantes,40,Femenino,42178,25420991,San Cayetano
+40,Malik,Oneil,44,Femenino,12823,43099582,Tres Arroyos
+41,Emma,Golden,44,Masculino,25769,12189540,Las Flores
+42,Fiona,Santiago,25,Masculino,28873,10854141,Necochea
+43,Margaret,Browning,20,Masculino,23050,43669843,Ayacucho
+44,Kiayada,Blankenship,39,Femenino,39735,26371214,San Cayetano
+45,Deborah,Herring,31,Masculino,42632,5219131,Coronel Suarez
+46,Dean,Murphy,23,Femenino,29016,25548183,Tres Arroyos
+47,Barry,Beach,40,Femenino,41655,8305661,Balcarce
+48,Alma,Simon,44,Femenino,12523,37962834,Tres Arroyos
+49,Hop,Boyd,33,Femenino,11430,33275380,Ayacucho
+50,Eden,Clemons,32,Masculino,20099,29100828,Tres Arroyos
+51,India,Mooney,29,Masculino,25474,8072629,Bolivar
+52,Robert,Bentley,24,Masculino,37323,8363709,Chaves
+53,Desirae,Bates,34,Masculino,21117,43239570,Coronel Suarez
+54,Harding,Doyle,20,Masculino,42429,11427221,Tres Arroyos
+55,Dominique,Hale,31,Masculino,49086,10044271,Azul
+56,Maisie,Travis,23,Femenino,31158,15148597,Juarez
+57,Tad,Brown,38,Masculino,44552,19658406,Rauch
+58,Lamar,Rollins,39,Femenino,32942,22248763,Juarez
+59,Haviva,Montoya,27,Femenino,32730,10026226,Azul
+60,Moses,Sanford,26,Masculino,20153,38510833,Tres Arroyos
+61,Damian,Humphrey,45,Femenino,47046,31503783,Necochea
+62,McKenzie,Brewer,42,Masculino,26645,40429287,Chaves
+63,Cheyenne,Rush,35,Femenino,39155,14198738,Coronel Suarez
+64,Shaeleigh,Walker,43,Femenino,18187,31293362,Coronel Suarez
+65,Lacy,Hays,44,Masculino,39338,25055003,Juarez
+66,Cole,Foster,27,Masculino,36171,3548100,Necochea
+67,Matthew,Hall,30,Femenino,16286,13646437,Bolivar
+68,Ira,Raymond,19,Masculino,26733,5522894,Loberia
+69,MacKensie,Robles,41,Femenino,10966,7682424,Rauch
+70,Dennis,Sutton,25,Femenino,24874,12125740,Loberia
+71,Abraham,Richard,30,Femenino,44571,9054198,Ayacucho
+72,Phoebe,Cooper,24,Femenino,43947,16718478,Tandil
+73,Talon,Ray,28,Masculino,15410,19534180,Coronel Suarez
+74,Carl,Alvarado,28,Masculino,22511,9881534,Juarez
+75,Aaron,Schultz,18,Femenino,15052,43894028,Tres Arroyos
+76,Sebastian,Mccoy,20,Masculino,42189,4137602,Juarez
+77,Buckminster,Lindsey,31,Masculino,30631,36178646,Tandil
+78,Chelsea,Copeland,32,Femenino,39153,44690051,Juarez
+79,Carl,Gould,31,Masculino,41119,27536429,Las Flores
+80,Preston,Hobbs,36,Masculino,39556,11112408,Las Flores
+81,Gretchen,Salinas,41,Femenino,44990,26298275,Chaves
+82,Stephanie,Harmon,22,Femenino,39109,5381044,Balcarce
+83,Nomlanga,Avila,37,Femenino,30209,36644515,San Cayetano
+84,Gary,Meyer,19,Femenino,21594,13526770,Necochea
+85,Gay,Buchanan,25,Femenino,16144,35017957,Tres Arroyos
+86,Emerson,Dixon,32,Femenino,10372,23504885,Chaves
+87,Mikayla,Patton,32,Masculino,32942,9917800,Bolivar
+88,Aladdin,White,20,Femenino,36028,24871887,Necochea
+89,Malcolm,Davenport,24,Masculino,45838,43064706,San Cayetano
+90,Patrick,Conner,40,Femenino,32640,37834203,Tandil
+91,Chandler,Marks,37,Masculino,45835,40329002,Loberia
+92,Edan,Pratt,23,Femenino,39332,9674719,Azul
+93,Abraham,Stevenson,18,Femenino,40555,43364984,Azul
+94,Violet,Stark,36,Masculino,26471,35888820,Azul
+95,Dominique,Flores,16,Masculino,39125,43643846,Balcarce
+96,Linus,Gray,42,Femenino,25883,38083187,Coronel Suarez
+97,Seth,Lott,82,Femenino,39336,16076605,Juarez
+98,Irma,Farley,40,Femenino,22214,41476633,Tandil
+99,Lance,Vance,56,Femenino,31702,23684050,Loberia
+100,Edward,Marsh,44,Femenino,13067,19510373,Juarez

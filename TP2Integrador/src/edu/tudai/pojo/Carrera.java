@@ -26,4 +26,17 @@ public class Carrera {
 	private Map<Integer, List<Estudiante>> cohortes;
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Estudiante> graduados;
+	
+	public Carrera() {
+		super();
+	}
+
+	public Carrera(String titulo, String tipo, String unidad_academica) {
+		super();
+		this.titulo = titulo;
+		this.tipo = tipo;
+		this.unidad_academica = unidad_academica;
+	}
+	
+	
 }
