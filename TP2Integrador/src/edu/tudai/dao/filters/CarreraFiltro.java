@@ -2,6 +2,7 @@ package edu.tudai.dao.filters;
 
 import edu.tudai.pojo.Carrera;
 import edu.tudai.pojo.Estudiante;
+import edu.tudai.pojo.Matricula;
 
 public class CarreraFiltro implements Filter{
 	
@@ -27,9 +28,13 @@ public class CarreraFiltro implements Filter{
 
 	@Override
 	public boolean cumple(Estudiante e) {
-		// TODO Auto-generated method stub
+		
+		for (Matricula m: e.getTitulos()) {
+			if (m.getCursada().getId_carrera() == this.carrera.getId_carrera()) {
+				return true;
+			}
+		}
 		return false;
 	}
-	
 
 }
