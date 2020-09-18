@@ -1,15 +1,13 @@
 package edu.tudai.pojo;
 
-import java.sql.Date;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Estudiante {
@@ -29,8 +27,8 @@ public class Estudiante {
 	private String residencia;
 	@Column (nullable = false)
 	private int nro_lu;
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "graduados", cascade = CascadeType.ALL)
-	private Map<Carrera, Date> titulos;
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Matricula> titulos;
 	
 	public Estudiante() {
 		super();
@@ -109,7 +107,43 @@ public class Estudiante {
 		return id_estudiante;
 	}
 	
-	public Date getFechaGraduacion(Carrera c) {
-		return titulos.get(c);
+
+	public List<Matricula> getTitulos() {
+		return titulos;
 	}
+
+	public void setTitulos(List<Matricula> titulos) {
+		this.titulos = titulos;
+	}
+	
+	
+//**devuelve todas las @Matricula carreras concluidas*/
+	@SuppressWarnings("null")
+	public List<Matricula> getConcluidos(){
+		List<Matricula> concluido = null;
+		for (Matricula m : titulos) {
+			if (m.getEgreso() != 0) {
+				concluido.add(m);
+			}
+		}
+		return concluido;
+	}
+	
+	//**carga la @param @Matricula.egreso fecha de egreso siendo que se encuentre la @Carrera c*/
+	public void  colacionar(int fecha,Carrera c){
+		for(Matricula m : titulos) {
+			if((m.getCursada().getId_carrera()) == (c.getId_carrera())){
+				m.setEgreso(fecha);
+			}
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Estudiante [id_estudiante=" + id_estudiante + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", edad=" + edad + ", genero=" + genero + ", dni=" + dni + ", residencia=" + residencia + ", nro_lu="
+				+ nro_lu + ", titulos=" + titulos + "]";
+	}
+	
+	
 }
