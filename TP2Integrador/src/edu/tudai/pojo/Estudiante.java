@@ -1,12 +1,11 @@
 package edu.tudai.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -27,7 +26,7 @@ public class Estudiante {
 	private String residencia;
 	@Column (nullable = false)
 	private int nro_lu;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "alumno")
 	private List<Matricula> titulos;
 	
 	public Estudiante() {
@@ -107,20 +106,15 @@ public class Estudiante {
 		return id_estudiante;
 	}
 	
-
 	public List<Matricula> getTitulos() {
-		return titulos;
-	}
-
-	public void setTitulos(List<Matricula> titulos) {
-		this.titulos = titulos;
+		List<Matricula> copy = new ArrayList<Matricula>(titulos);
+		return copy;
 	}
 	
 	
-//**devuelve todas las @Matricula carreras concluidas*/
-	@SuppressWarnings("null")
+	//**devuelve todas las @Matricula carreras concluidas*/
 	public List<Matricula> getConcluidos(){
-		List<Matricula> concluido = null;
+		List<Matricula> concluido = new ArrayList<Matricula>();
 		for (Matricula m : titulos) {
 			if (m.getEgreso() != 0) {
 				concluido.add(m);

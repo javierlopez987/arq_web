@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 public class Matricula {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private int idMatricula;
+	private int id_matricula;
 	@Column
 	private int ingreso;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Estudiante alumno;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Carrera cursada;
 	@Column
 	private int egreso;
@@ -32,6 +32,13 @@ public class Matricula {
 		this.alumno = alumno;
 		this.cursada = cursada;
 		this.egreso = 0;
+	}
+	public Matricula(int ano_ingreso, Estudiante alumno, Carrera cursada, int ano_egreso) {
+		super();
+		this.ingreso = ano_ingreso;
+		this.alumno = alumno;
+		this.cursada = cursada;
+		this.egreso = ano_egreso;
 	}
 	public int getIngreso() {
 		return ingreso;
@@ -60,7 +67,7 @@ public class Matricula {
 	}
 	@Override
 	public String toString() {
-		return "Matricula [idMatricula=" + idMatricula + ", ingreso=" + ingreso + ", alumno=" + alumno + ", cursada="
+		return "Matricula [id_matricula=" + id_matricula + ", ingreso=" + ingreso + ", alumno=" + alumno + ", cursada="
 				+ cursada + ", egreso=" + egreso + "]";
 	}
 	

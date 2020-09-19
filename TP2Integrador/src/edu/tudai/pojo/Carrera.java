@@ -1,14 +1,13 @@
 package edu.tudai.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -22,7 +21,7 @@ public class Carrera {
 	private String tipo;
 	@Column
 	private String unidad_academica;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cursada")
 	private List<Matricula> matriculas;
 	
 	public Carrera() {
@@ -61,21 +60,17 @@ public class Carrera {
 	}
 
 	public List<Matricula> getMatriculas() {
-		return matriculas;
+		List<Matricula> copy = new ArrayList<Matricula>(matriculas);
+		return copy;
 	}
-
-	public void setMatriculas(List<Matricula> matriculas) {
-		this.matriculas = matriculas;
-	}
-
 
 	public int getId_carrera() {
 		return id_carrera;
 	}
+	
 	//** Devuelve una lista de @Matricula en estado graduados*/
-	@SuppressWarnings("null")
 	public List<Matricula> getGraduados(){
-		List<Matricula> graduados = null;
+		List<Matricula> graduados = new ArrayList<Matricula>();
 		for (Matricula m : matriculas) {
 			if (m.getEgreso() != 0) {
 				graduados.add(m);
@@ -86,7 +81,7 @@ public class Carrera {
 	
 	//**devuelve los @Matricula graduados en una fecha dada*/
 	public List<Matricula> getGraduados(int fecha){
-		List<Matricula> graduados = null;
+		List<Matricula> graduados = new ArrayList<Matricula>();
 		for (Matricula m : matriculas) {
 			if (m.getEgreso() == fecha) {
 				graduados.add(m);
