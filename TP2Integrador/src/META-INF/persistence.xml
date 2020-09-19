@@ -9,6 +9,7 @@
 
 		<class>edu.tudai.pojo.Carrera</class>
 		<class>edu.tudai.pojo.Estudiante</class>
+		<class>edu.tudai.pojo.Matricula</class>
 
 		<properties>
 

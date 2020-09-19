@@ -16,6 +16,13 @@ public class Demo {
 	
 	public static void main(String[] args) {
 
+		Sistema programa = new Sistema();
+		System.out.println(programa.getEstudiantesOrderByLastname());
+		System.out.println(programa.getEstudiantes());
+		
+	}
+	
+	private static Sistema cargarSistema() {
 		/**
 		 * Se cargan los datos de estudiantes.csv 
 		 * si la tabla en la BD está vacía
@@ -42,8 +49,10 @@ public class Demo {
 		if(matriculas.isEmpty()) {
 			cargarMatriculas();			
 		}
-
+		
 		Sistema programa = new Sistema(carreras, estudiantes);
+		
+		return programa;
 	}
 
 	/**
@@ -57,14 +66,14 @@ public class Demo {
 			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
 
 			for (CSVRecord row : parser) {
-				int id = new Integer(row.get(1));
-				String nombre = row.get(2);
-				String apellido = row.get(3);
-				int edad = new Integer(row.get(4));
-				String genero = row.get(5);
+				int id = new Integer(row.get(0));
+				String nombre = row.get(1);
+				String apellido = row.get(2);
+				int edad = new Integer(row.get(3));
+				String genero = row.get(4);
+				int nro_lu = new Integer(row.get(5));
 				int dni = new Integer(row.get(6));
 				String residencia = row.get(7);
-				int nro_lu = new Integer(row.get(8));
 				
 				Estudiante estudiante = new Estudiante(
 						id, nombre, apellido, edad, genero, dni, residencia, nro_lu);
@@ -86,9 +95,9 @@ public class Demo {
 			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
 
 			for (CSVRecord row : parser) {
-				String titulo = row.get(1);
-				String tipo = row.get(2);
-				String unidad_academica = row.get(3);
+				String titulo = row.get(0);
+				String tipo = row.get(1);
+				String unidad_academica = row.get(2);
 				
 				Carrera carrera = new Carrera(titulo, tipo, unidad_academica);
 				Sistema.carreraDAO.insertCarrera(carrera);
@@ -110,10 +119,10 @@ public class Demo {
 			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
 
 			for (CSVRecord row : parser) {
-				Integer id_estudiante = new Integer(row.get(1));
-				Integer id_carrera = new Integer(row.get(2));
-				Integer ano_ingreso = new Integer(row.get(3));
-				Integer ano_egreso = new Integer(row.get(4));
+				Integer id_estudiante = new Integer(row.get(0));
+				Integer id_carrera = new Integer(row.get(1));
+				Integer ano_ingreso = new Integer(row.get(2));
+				Integer ano_egreso = new Integer(row.get(3));
 				
 				Carrera cursada = Sistema.carreraDAO.findCarrera(id_carrera);
 				Estudiante alumno = Sistema.estudianteDAO.findEstudiante(id_estudiante);

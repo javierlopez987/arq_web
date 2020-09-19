@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Estudiante {
+public class Estudiante implements Comparable<Estudiante>{
 	@Id
 	private int id_estudiante;
 	@Column
@@ -136,7 +136,7 @@ public class Estudiante {
 	public String toString() {
 		return "Estudiante [id_estudiante=" + id_estudiante + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", edad=" + edad + ", genero=" + genero + ", dni=" + dni + ", residencia=" + residencia + ", nro_lu="
-				+ nro_lu + ", titulos=" + titulos + "]";
+				+ nro_lu + "]";
 	}
 
 	@Override
@@ -159,6 +159,11 @@ public class Estudiante {
 		if (id_estudiante != other.id_estudiante)
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Estudiante o) {
+		return this.apellido.compareTo(o.getApellido());
 	}
 	
 	

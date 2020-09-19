@@ -79,16 +79,43 @@ public class JPADAOEstudiante implements DAOEstudiante {
 		Collection<Estudiante> result = null;
 		String jpql = "SELECT e FROM Estudiante e";
 		
-		em.getTransaction().begin();
 		try {
 			TypedQuery<Estudiante> query = em.createQuery(jpql, Estudiante.class);
 			result = query.getResultList();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		em.getTransaction().commit();
+		
+		return result;
+	}
+	
+	public Collection<Estudiante> selectEstudiantesOrderByLastnameName() {
+		Collection<Estudiante> result = null;
+		String jpql = "SELECT e FROM Estudiante e ORDER BY e.apellido, e.nombre";
+		
+		try {
+			TypedQuery<Estudiante> query = em.createQuery(jpql, Estudiante.class);
+			result = query.getResultList();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		
 		return result;
 	}
 
+	public Estudiante getEstudiante(int nro_lu) {
+		Estudiante result = null;
+		String jpql = "SELECT e FROM Estudiante e WHERE e.nro_lu = ?1";
+		
+		try {
+			TypedQuery<Estudiante> query = em.createQuery(jpql, Estudiante.class);
+			query.setParameter(1, nro_lu);
+			result = query.getSingleResult();
+		} catch (Exception e) {
+			result = null;
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }

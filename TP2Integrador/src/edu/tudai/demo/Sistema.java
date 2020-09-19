@@ -2,6 +2,7 @@ package edu.tudai.demo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import edu.tudai.dao.i.DAOCarrera;
 import edu.tudai.dao.i.DAOEstudiante;
 import edu.tudai.dao.i.DAOFactory;
 import edu.tudai.dao.i.DAOMatricula;
+import edu.tudai.dao.jpa.JPADAOEstudiante;
 import edu.tudai.filters.Filter;
 import edu.tudai.pojo.*;
 
@@ -96,4 +98,29 @@ public class Sistema {
 		return result;
 	}
 	
+	/**
+	 * Esta implementacion del servicio utiliza solo JPQL para dar respuesta.
+	 * @return lista de estudiantes ordenados por apellido, nombre.
+	 */
+	public List<Estudiante> getEstudiantesOrderByLastname() {
+		List<Estudiante> result = (List<Estudiante>) ((JPADAOEstudiante) estudianteDAO).selectEstudiantesOrderByLastnameName();
+		return result;
+	}
+	
+	/**
+	 * Esta implementacion del servicio utiliza JPQL para obtener el Business Object (Estudiante)
+	 * y luego se aplica la Business Logic desde Java utilizando POO.
+	 * Esta implementación es más flexible, es decir, menos pegada al código. Se podría escalar 
+	 * utilizando la interface Comparator.
+	 * @return lista de estudiantes ordenados por apellido.
+	 */
+	public List<Estudiante> getEstudiantes() {
+		List<Estudiante> result = (List<Estudiante>) estudianteDAO.selectEstudiantes();
+		Collections.sort(result);
+		return result;
+	}
+	
+	public Estudiante getEstudiante(int nro_lu) {
+		return ((JPADAOEstudiante) estudianteDAO).getEstudiante(nro_lu);
+	}
 }
