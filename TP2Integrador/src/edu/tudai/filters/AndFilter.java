@@ -1,4 +1,4 @@
-package edu.tudai.dao.filters;
+package edu.tudai.filters;
 
 import edu.tudai.pojo.Estudiante;
 

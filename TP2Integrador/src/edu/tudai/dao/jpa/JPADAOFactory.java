@@ -4,9 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import edu.tudai.dao.i.DAOFactory;
-import edu.tudai.dao.i.DAOEstudiante;
-import edu.tudai.dao.i.DAOCarrera;
+import edu.tudai.dao.i.*;
 
 public class JPADAOFactory extends DAOFactory{
 	private EntityManagerFactory emf;
@@ -24,6 +22,11 @@ public class JPADAOFactory extends DAOFactory{
 	@Override
 	public DAOCarrera getDAOCarrera() {
 		return new JPADAOCarrera(em);
+	}
+
+	@Override
+	public DAOMatricula getDAOMatricula() {
+		return new JPADAOMatricula(em);
 	}
 
 }

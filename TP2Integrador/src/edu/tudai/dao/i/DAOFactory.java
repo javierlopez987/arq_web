@@ -34,4 +34,6 @@ public abstract class DAOFactory {
 	
 	public abstract DAOCarrera getDAOCarrera();
 	
+	public abstract DAOMatricula getDAOMatricula();
+	
 }

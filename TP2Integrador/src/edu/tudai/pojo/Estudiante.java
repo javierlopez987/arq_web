@@ -138,6 +138,28 @@ public class Estudiante {
 				+ ", edad=" + edad + ", genero=" + genero + ", dni=" + dni + ", residencia=" + residencia + ", nro_lu="
 				+ nro_lu + ", titulos=" + titulos + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id_estudiante;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estudiante other = (Estudiante) obj;
+		if (id_estudiante != other.id_estudiante)
+			return false;
+		return true;
+	}
 	
 	
 }

@@ -13,9 +13,6 @@ import edu.tudai.pojo.*;
 
 
 public class Demo {
-	public static DAOFactory daoFactory = DAOFactory.getDAOFactory(2);
-	public static DAOEstudiante estudianteDAO = daoFactory.getDAOEstudiante();
-	public static DAOCarrera carreraDAO = daoFactory.getDAOCarrera();	
 	
 	public static void main(String[] args) {
 
@@ -23,7 +20,7 @@ public class Demo {
 		 * Se cargan los datos de estudiantes.csv 
 		 * si la tabla en la BD está vacía
 		 */
-		Collection<Estudiante> estudiantes = estudianteDAO.selectEstudiantes();
+		Collection<Estudiante> estudiantes = Sistema.estudianteDAO.selectEstudiantes();
 		if(estudiantes.isEmpty()) {
 			cargarEstudiantes();
 		}
@@ -32,18 +29,27 @@ public class Demo {
 		 * Se cargan los datos de carreras.csv 
 		 * si la tabla en la BD está vacía
 		 */
-		Collection<Carrera> carreras = carreraDAO.selectCarreras();
+		Collection<Carrera> carreras = Sistema.carreraDAO.selectCarreras();
 		if(carreras.isEmpty()) {
 			cargarCarreras();			
+		}
+		
+		/**
+		 * Se cargan los datos de matriculas.csv 
+		 * si la tabla en la BD está vacía
+		 */
+		Collection<Matricula> matriculas = Sistema.matriculaDAO.selectMatriculas();
+		if(matriculas.isEmpty()) {
+			cargarMatriculas();			
 		}
 
 		Sistema programa = new Sistema(carreras, estudiantes);
 	}
-	
+
 	/**
 	 * Función que inserta línea por línea los datos de estudiantes.csv en la BD
 	 */
-	public static void cargarEstudiantes() {
+	private static void cargarEstudiantes() {
 		String path = "csv/estudiantes.csv";
 		
 		CSVParser parser;
@@ -62,7 +68,7 @@ public class Demo {
 				
 				Estudiante estudiante = new Estudiante(
 						id, nombre, apellido, edad, genero, dni, residencia, nro_lu);
-				estudianteDAO.insertEstudiante(estudiante);
+				Sistema.estudianteDAO.insertEstudiante(estudiante);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -72,7 +78,7 @@ public class Demo {
 	/**
 	 * Función que inserta línea por línea los datos de carreras.csv en la BD
 	 */
-	public static void cargarCarreras() {
+	private static void cargarCarreras() {
 		String path = "csv/carreras.csv";
 		
 		CSVParser parser;
@@ -85,7 +91,37 @@ public class Demo {
 				String unidad_academica = row.get(3);
 				
 				Carrera carrera = new Carrera(titulo, tipo, unidad_academica);
-				carreraDAO.insertCarrera(carrera);
+				Sistema.carreraDAO.insertCarrera(carrera);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * Función que inserta línea por línea los datos de matriculas.csv en la BD
+	 */
+	private static void cargarMatriculas() {
+		String path = "csv/matriculas.csv";
+		
+		CSVParser parser;
+		try {
+			parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader(path));
+
+			for (CSVRecord row : parser) {
+				Integer id_estudiante = new Integer(row.get(1));
+				Integer id_carrera = new Integer(row.get(2));
+				Integer ano_ingreso = new Integer(row.get(3));
+				Integer ano_egreso = new Integer(row.get(4));
+				
+				Carrera cursada = Sistema.carreraDAO.findCarrera(id_carrera);
+				Estudiante alumno = Sistema.estudianteDAO.findEstudiante(id_estudiante);
+				
+				if(cursada != null && alumno != null) {
+					Matricula matricula = new Matricula(ano_ingreso, alumno, cursada, ano_egreso);
+					Sistema.matriculaDAO.insertMatricula(matricula);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

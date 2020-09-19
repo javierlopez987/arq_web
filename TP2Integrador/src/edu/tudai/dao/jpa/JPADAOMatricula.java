@@ -62,7 +62,7 @@ public class JPADAOMatricula implements DAOMatricula{
 	
 	public Collection<Matricula> selectMatriculas(){
 		Collection<Matricula> result;
-		String jpql = "SELECT t FROM Matricula m";
+		String jpql = "SELECT m FROM Matricula m";
 		
 		em.getTransaction().begin();
 		try {

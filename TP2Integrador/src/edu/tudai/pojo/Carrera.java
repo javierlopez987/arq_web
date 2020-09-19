@@ -2,6 +2,8 @@ package edu.tudai.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +23,7 @@ public class Carrera {
 	private String tipo;
 	@Column
 	private String unidad_academica;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cursada")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cursada", cascade = CascadeType.PERSIST)
 	private List<Matricula> matriculas;
 	
 	public Carrera() {
@@ -35,6 +37,10 @@ public class Carrera {
 		this.unidad_academica = unidad_academica;
 	}
 
+	public int getId_carrera() {
+		return id_carrera;
+	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -63,9 +69,27 @@ public class Carrera {
 		List<Matricula> copy = new ArrayList<Matricula>(matriculas);
 		return copy;
 	}
-
-	public int getId_carrera() {
-		return id_carrera;
+	
+	public Matricula matricular(Estudiante e, int ingreso) {
+		Matricula nueva = new Matricula(ingreso, e, this);
+		if(!matriculas.contains(nueva)) {
+			matriculas.add(nueva);			
+		} else {
+			nueva = null;
+		}
+		return nueva;
+	}
+	
+	/**
+	 * Devuelve true si al menos una vez un alumno fue matriculado
+	 * dado que matriculas conserva el registro histórico de la carrera
+	 */
+	public boolean tieneInscriptos() {
+		return !matriculas.isEmpty();
+	}
+	
+	public int getCantInscriptos() {
+		return matriculas.size();
 	}
 	
 	//** Devuelve una lista de @Matricula en estado graduados*/
@@ -96,4 +120,27 @@ public class Carrera {
 				+ unidad_academica + ", matriculas=" + matriculas + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id_carrera;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Carrera other = (Carrera) obj;
+		if (id_carrera != other.id_carrera)
+			return false;
+		return true;
+	}
+
+	
 }
