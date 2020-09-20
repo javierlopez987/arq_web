@@ -96,11 +96,12 @@ public class JPADAOCarrera implements DAOCarrera {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Collection<Carrera> selectCarrerasConInscriptos() {
-		Collection<Carrera> result;
-		String jpql = "SELECT c, COUNT(c) "
+	public Collection<Object[]> selectCarrerasConInscriptos() {
+		Collection<Object[]> result;
+		String jpql = "SELECT c, COUNT(c) AS insc "
 					+ "FROM Carrera c JOIN c.matriculas m "
-					+ "GROUP BY c";	
+					+ "GROUP BY c "
+					+ "ORDER BY insc DESC ";
 		try {
 			Query query = em.createQuery(jpql);
 			result = query.getResultList();

@@ -72,10 +72,6 @@ public class Sistema {
 		return c.matricular(e, ano_ingreso);
 	}
 	
-	/**public List<Carrera> getCarreras(Filter f){
-		
-	}**/
-	
 	public List<Estudiante> getEstudiantes(Filter f) {
 		List<Estudiante> result = new ArrayList<Estudiante>();
 		
@@ -97,17 +93,6 @@ public class Sistema {
 		return result;
 	}
 	
-	public List<Estudiante> getEstudiantesByGenero(String g) {
-		List<Estudiante> result = (List<Estudiante>) ((JPADAOEstudiante) estudianteDAO).selectEstudiantesByGenero(g);
-		return result;
-	}
-	
-	public List<Estudiante> getEstudiantesByResidencia(Carrera carrera, String residencia) {
-		List<Estudiante> result = (List<Estudiante>) ((JPADAOEstudiante) estudianteDAO).selectEstudiantesByResidencia(carrera, residencia);
-		return result;
-	}
-	
-	
 	/**
 	 * Esta implementacion del servicio utiliza JPQL para obtener el Business Object (Estudiante)
 	 * y luego se aplica la Business Logic desde Java utilizando POO.
@@ -125,8 +110,26 @@ public class Sistema {
 		return ((JPADAOEstudiante) estudianteDAO).getEstudiante(nro_lu);
 	}
 	
+	public List<Estudiante> getEstudiantesByGenero(String g) {
+		List<Estudiante> result = (List<Estudiante>) ((JPADAOEstudiante) estudianteDAO).selectEstudiantesByGenero(g);
+		return result;
+	}
+	
+	public List<Estudiante> getEstudiantesByResidencia(Carrera carrera, String residencia) {
+		List<Estudiante> result = (List<Estudiante>) ((JPADAOEstudiante) estudianteDAO).selectEstudiantesByResidencia(carrera, residencia);
+		return result;
+	}
+	
 	public List<Carrera> getCarrerasConInscriptos() {
-		List<Carrera> result = (List<Carrera>) ((JPADAOCarrera) carreraDAO).selectCarrerasConInscriptos();
+		List<Carrera> result = new ArrayList<Carrera>();
+		List<Object[]> info = (List<Object[]>) ((JPADAOCarrera) carreraDAO).selectCarrerasConInscriptos();
+		for(Object[] o: info) {
+			Carrera c = (Carrera) o[0];
+			Long insc = (Long) o[1];
+			c.setInscriptos(insc.intValue());
+			result.add(c);
+		}
+		
 		return result;
 	}
 }

@@ -3,6 +3,7 @@ package edu.tudai.demo;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -23,7 +24,17 @@ public class Demo {
 		Carrera c = Sistema.carreraDAO.findCarrera(3);
 		System.out.println(c);
 		System.out.println(programa.getEstudiantesByResidencia(c,"Olavarria"));
-		System.out.println(programa.getCarrerasConInscriptos());
+		List<Carrera> carreras = programa.getCarrerasConInscriptos();
+		imprimirInformeInscriptosCarreras(carreras);
+	}
+	
+	private static void imprimirInformeInscriptosCarreras(List<Carrera> carreras) {
+		for(Carrera c: carreras) {
+			System.out.println("------");
+			System.out.println(c);
+			System.out.println("Inscriptos: " + c.getCantInscriptos());
+			System.out.println("------");
+		}
 	}
 	
 	private static Sistema cargarSistema() {
