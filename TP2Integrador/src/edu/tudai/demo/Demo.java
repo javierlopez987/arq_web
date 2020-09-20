@@ -16,12 +16,14 @@ public class Demo {
 	
 	public static void main(String[] args) {
 
-		Sistema programa =  new Sistema();//cargarSistema();
+		cargarSistema();
+		Sistema programa =  new Sistema();
 		System.out.println(programa.getEstudiantesOrderByLastname());
 		System.out.println(programa.getEstudiantes());
 		Carrera c = Sistema.carreraDAO.findCarrera(3);
+		System.out.println(c);
 		System.out.println(programa.getEstudiantesByResidencia(c,"Olavarria"));
-		
+		System.out.println(programa.getCarrerasConInscriptos());
 	}
 	
 	private static Sistema cargarSistema() {

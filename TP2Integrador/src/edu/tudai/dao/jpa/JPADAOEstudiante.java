@@ -21,10 +21,11 @@ public class JPADAOEstudiante implements DAOEstudiante {
 		boolean inserted;
 		try {
 			em.getTransaction().begin();
-			em.persist(e);;
+			em.persist(e);
 			em.getTransaction().commit();
 			inserted = true;
 		} catch (Exception exc) {
+			em.getTransaction().rollback();
 			System.out.println(exc);
 			inserted = false;
 		}

@@ -25,6 +25,7 @@ public class JPADAOCarrera implements DAOCarrera {
 			em.getTransaction().commit();
 			inserted = true;
 		} catch (Exception e) {
+			em.getTransaction().rollback();
 			System.out.println(e);
 			inserted = false;
 		}
@@ -86,6 +87,22 @@ public class JPADAOCarrera implements DAOCarrera {
 		try {
 			TypedQuery<Carrera> query = em.createQuery(jpql, Carrera.class);
 			query.setParameter(1, p);
+			result = query.getResultList();
+		} catch (Exception e) {
+			System.out.println(e);
+			result = null;
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Collection<Carrera> selectCarrerasConInscriptos() {
+		Collection<Carrera> result;
+		String jpql = "SELECT c, COUNT(c) "
+					+ "FROM Carrera c JOIN c.matriculas m "
+					+ "GROUP BY c";	
+		try {
+			Query query = em.createQuery(jpql);
 			result = query.getResultList();
 		} catch (Exception e) {
 			System.out.println(e);

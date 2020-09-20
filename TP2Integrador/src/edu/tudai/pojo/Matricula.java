@@ -1,24 +1,25 @@
 package edu.tudai.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+
+import edu.tudai.util.MatriculaId;
 
 @Entity
 public class Matricula {
-	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
-	private int id_matricula;
+	@EmbeddedId
+	private MatriculaId id_matricula = new MatriculaId();
+	@ManyToOne
+	@MapsId("id_estudiante")
+	private Estudiante alumno;
+	@ManyToOne
+	@MapsId("id_carrera")
+	private Carrera cursada;
 	@Column
 	private int ingreso;
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Estudiante alumno;
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Carrera cursada;
 	@Column
 	private int egreso;
 	

@@ -11,20 +11,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Carrera {
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
-	private int id_carrera;
+	@GeneratedValue
+	private int id;
 	@Column
 	private String titulo;
 	@Column
 	private String tipo;
 	@Column
 	private String unidad_academica;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cursada", cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cursada")
 	private List<Matricula> matriculas;
+	@Transient
+	private int inscriptos;
 	
 	public Carrera() {
 		super();
@@ -38,7 +41,7 @@ public class Carrera {
 	}
 
 	public int getId_carrera() {
-		return id_carrera;
+		return id;
 	}
 	
 	public String getTitulo() {
@@ -63,6 +66,14 @@ public class Carrera {
 
 	public void setUnidad_academica(String unidad_academica) {
 		this.unidad_academica = unidad_academica;
+	}
+	
+	public int getInscriptos() {
+		return inscriptos;
+	}
+
+	public void setInscriptos(int inscriptos) {
+		this.inscriptos = inscriptos;
 	}
 
 	public List<Matricula> getMatriculas() {
@@ -116,15 +127,15 @@ public class Carrera {
 
 	@Override
 	public String toString() {
-		return "Carrera [id_carrera=" + id_carrera + ", titulo=" + titulo + ", tipo=" + tipo + ", unidad_academica="
-				+ unidad_academica + ", matriculas=" + matriculas + "]";
+		return "Carrera [id_carrera=" + id + ", titulo=" + titulo + ", tipo=" + tipo + ", unidad_academica="
+				+ unidad_academica + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id_carrera;
+		result = prime * result + id;
 		return result;
 	}
 
@@ -137,7 +148,7 @@ public class Carrera {
 		if (getClass() != obj.getClass())
 			return false;
 		Carrera other = (Carrera) obj;
-		if (id_carrera != other.id_carrera)
+		if (id != other.id)
 			return false;
 		return true;
 	}

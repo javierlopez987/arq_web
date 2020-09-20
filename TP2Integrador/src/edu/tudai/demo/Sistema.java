@@ -7,11 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.tudai.dao.i.DAOCarrera;
-import edu.tudai.dao.i.DAOEstudiante;
-import edu.tudai.dao.i.DAOFactory;
-import edu.tudai.dao.i.DAOMatricula;
-import edu.tudai.dao.jpa.JPADAOEstudiante;
+import edu.tudai.dao.i.*;
+import edu.tudai.dao.jpa.*;
 import edu.tudai.filters.Filter;
 import edu.tudai.pojo.*;
 
@@ -126,5 +123,10 @@ public class Sistema {
 	
 	public Estudiante getEstudiante(int nro_lu) {
 		return ((JPADAOEstudiante) estudianteDAO).getEstudiante(nro_lu);
+	}
+	
+	public List<Carrera> getCarrerasConInscriptos() {
+		List<Carrera> result = (List<Carrera>) ((JPADAOCarrera) carreraDAO).selectCarrerasConInscriptos();
+		return result;
 	}
 }

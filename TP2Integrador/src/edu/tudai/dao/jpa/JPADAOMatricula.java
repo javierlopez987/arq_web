@@ -2,6 +2,7 @@ package edu.tudai.dao.jpa;
 
 import java.util.Collection;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -24,10 +25,11 @@ public class JPADAOMatricula implements DAOMatricula{
 		boolean inserted;
 		try {
 			em.getTransaction().begin();
-			em.persist(m);;
+			em.persist(m);
 			em.getTransaction().commit();
 			inserted = true;
 		} catch (Exception exc) {
+			em.getTransaction().rollback();
 			System.out.println(exc);
 			inserted = false;
 		}

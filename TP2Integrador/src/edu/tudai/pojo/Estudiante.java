@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Estudiante implements Comparable<Estudiante>{
 	@Id
-	private int id_estudiante;
+	private int id;
 	@Column
 	private String nombre;
 	@Column
@@ -36,7 +36,7 @@ public class Estudiante implements Comparable<Estudiante>{
 	public Estudiante(int id_estudiante, String nombre, String apellido, int edad, String genero, int dni,
 			String residencia, int nro_lu) {
 		super();
-		this.id_estudiante = id_estudiante;
+		this.id = id_estudiante;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.edad = edad;
@@ -103,7 +103,7 @@ public class Estudiante implements Comparable<Estudiante>{
 	}
 
 	public int getId_estudiante() {
-		return id_estudiante;
+		return id;
 	}
 	
 	public List<Matricula> getTitulos() {
@@ -134,7 +134,7 @@ public class Estudiante implements Comparable<Estudiante>{
 	
 	@Override
 	public String toString() {
-		return "Estudiante [id_estudiante=" + id_estudiante + ", nombre=" + nombre + ", apellido=" + apellido
+		return "Estudiante [id_estudiante=" + id + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", edad=" + edad + ", genero=" + genero + ", dni=" + dni + ", residencia=" + residencia + ", nro_lu="
 				+ nro_lu + "]";
 	}
@@ -143,7 +143,7 @@ public class Estudiante implements Comparable<Estudiante>{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id_estudiante;
+		result = prime * result + id;
 		return result;
 	}
 
@@ -156,7 +156,7 @@ public class Estudiante implements Comparable<Estudiante>{
 		if (getClass() != obj.getClass())
 			return false;
 		Estudiante other = (Estudiante) obj;
-		if (id_estudiante != other.id_estudiante)
+		if (id != other.id)
 			return false;
 		return true;
 	}
