@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import edu.tudai.dao.i.DAOEstudiante;
+import edu.tudai.pojo.Carrera;
 import edu.tudai.pojo.Estudiante;
 
 public class JPADAOEstudiante implements DAOEstudiante {
@@ -113,6 +114,40 @@ public class JPADAOEstudiante implements DAOEstudiante {
 			result = query.getSingleResult();
 		} catch (Exception e) {
 			result = null;
+			System.out.println(e);
+		}
+		
+		return result;
+	}
+	
+	
+	// Devuelve @Estudiante todos los estudiantes que cumplen con un @param genero
+	public Collection<Estudiante> selectEstudiantesByGenero(String g) {
+		Collection<Estudiante> result = null;
+		String jpql = "SELECT e FROM Estudiante e WHERE e.genero = ?1 ORDER BY e.apellido, e.nombre";
+		
+		try {
+			TypedQuery<Estudiante> query = em.createQuery(jpql, Estudiante.class);
+			query.setParameter(1, g);
+			result = query.getResultList();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
+	
+	public Collection<Estudiante> selectEstudiantesByResidencia(Carrera carrera,String residencia) {
+		Collection<Estudiante> result = null;
+		
+		String jpql = "SELECT e FROM Estudiante e JOIN e.titulos t "
+					+ "WHERE e.residencia = ?1 AND t.cursada = ?2";
+		try {
+			TypedQuery<Estudiante> query = em.createQuery(jpql, Estudiante.class);
+			query.setParameter(2, carrera);
+			query.setParameter(1, residencia);
+			result = query.getResultList();
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		

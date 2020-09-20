@@ -16,9 +16,11 @@ public class Demo {
 	
 	public static void main(String[] args) {
 
-		Sistema programa = new Sistema();
+		Sistema programa =  new Sistema();//cargarSistema();
 		System.out.println(programa.getEstudiantesOrderByLastname());
 		System.out.println(programa.getEstudiantes());
+		Carrera c = Sistema.carreraDAO.findCarrera(3);
+		System.out.println(programa.getEstudiantesByResidencia(c,"Olavarria"));
 		
 	}
 	

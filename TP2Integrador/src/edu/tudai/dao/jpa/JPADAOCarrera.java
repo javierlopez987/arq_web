@@ -82,9 +82,7 @@ public class JPADAOCarrera implements DAOCarrera {
 	@Override
 	public Collection<Carrera> selectCarreras(Estudiante p) {
 		Collection<Carrera> result;
-		String jpql = "SELECT c FROM Carrera c WHERE c.estudiantes = ?1";
-		
-		em.getTransaction().begin();
+		String jpql = "SELECT c FROM Carrera c WHERE c.estudiantes = ?1";	
 		try {
 			TypedQuery<Carrera> query = em.createQuery(jpql, Carrera.class);
 			query.setParameter(1, p);
@@ -93,10 +91,7 @@ public class JPADAOCarrera implements DAOCarrera {
 			System.out.println(e);
 			result = null;
 		}
-		em.getTransaction().commit();
-		
 		return result;
 	}
-	
 	
 }

@@ -75,16 +75,9 @@ public class Sistema {
 		return c.matricular(e, ano_ingreso);
 	}
 	
-	public Map<Carrera, Integer> getCarreras() {
-		Map<Carrera, Integer> result = new HashMap<Carrera, Integer>();
-		for(Carrera c: carreras) {
-			if(c.tieneInscriptos()) {
-				Integer cant = c.getCantInscriptos();
-				result.put(c, cant);
-			}
-		}
-		return result;
-	}
+	/**public List<Carrera> getCarreras(Filter f){
+		
+	}**/
 	
 	public List<Estudiante> getEstudiantes(Filter f) {
 		List<Estudiante> result = new ArrayList<Estudiante>();
@@ -106,6 +99,17 @@ public class Sistema {
 		List<Estudiante> result = (List<Estudiante>) ((JPADAOEstudiante) estudianteDAO).selectEstudiantesOrderByLastnameName();
 		return result;
 	}
+	
+	public List<Estudiante> getEstudiantesByGenero(String g) {
+		List<Estudiante> result = (List<Estudiante>) ((JPADAOEstudiante) estudianteDAO).selectEstudiantesByGenero(g);
+		return result;
+	}
+	
+	public List<Estudiante> getEstudiantesByResidencia(Carrera carrera, String residencia) {
+		List<Estudiante> result = (List<Estudiante>) ((JPADAOEstudiante) estudianteDAO).selectEstudiantesByResidencia(carrera, residencia);
+		return result;
+	}
+	
 	
 	/**
 	 * Esta implementacion del servicio utiliza JPQL para obtener el Business Object (Estudiante)
