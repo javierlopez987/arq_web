@@ -14,21 +14,27 @@ import edu.tudai.pojo.*;
 
 
 public class Demo {
+	private static Sistema programa =  new Sistema();
 	
 	public static void main(String[] args) {
 
-		cargarSistema();
-		Sistema programa =  new Sistema();
+		cargarBD();
 		System.out.println(programa.getEstudiantesOrderByLastname());
 		System.out.println(programa.getEstudiantes());
 		Carrera c = Sistema.carreraDAO.findCarrera(3);
 		System.out.println(c);
 		System.out.println(programa.getEstudiantesByResidencia(c,"Olavarria"));
-		List<Carrera> carreras = programa.getCarrerasConInscriptos();
-		imprimirInformeInscriptosCarreras(carreras);
+		
+		imprimirInformeInscriptosCarreras();
 	}
 	
-	private static void imprimirInformeInscriptosCarreras(List<Carrera> carreras) {
+	/**
+	 * Imprime carreras con estudiantes inscriptos, 
+	 * ordenadas por cantidad de inscriptos
+	 */
+	private static void imprimirInformeInscriptosCarreras() {
+		
+		List<Carrera> carreras = programa.getCarrerasConInscriptos();
 		for(Carrera c: carreras) {
 			System.out.println("------");
 			System.out.println(c);
@@ -37,7 +43,10 @@ public class Demo {
 		}
 	}
 	
-	private static Sistema cargarSistema() {
+	/**
+	 * Carga la información desde los csv hacia la BD
+	 */
+	private static void cargarBD() {
 		/**
 		 * Se cargan los datos de estudiantes.csv 
 		 * si la tabla en la BD está vacía
@@ -65,16 +74,13 @@ public class Demo {
 			cargarMatriculas();			
 		}
 		
-		Sistema programa = new Sistema(carreras, estudiantes);
-		
-		return programa;
 	}
 
 	/**
-	 * Función que inserta línea por línea los datos de estudiantes.csv en la BD
+	 * Función que inserta línea por línea los datos de estudiantes en la BD
 	 */
 	private static void cargarEstudiantes() {
-		String path = "csv/estudiantes.csv";
+		String path = "csv/estudiantes_export.csv";
 		
 		CSVParser parser;
 		try {
@@ -100,10 +106,10 @@ public class Demo {
 	}
 	
 	/**
-	 * Función que inserta línea por línea los datos de carreras.csv en la BD
+	 * Función que inserta línea por línea los datos de carreras en la BD
 	 */
 	private static void cargarCarreras() {
-		String path = "csv/carreras.csv";
+		String path = "csv/carreras_export.csv";
 		
 		CSVParser parser;
 		try {
@@ -124,10 +130,10 @@ public class Demo {
 	
 	
 	/**
-	 * Función que inserta línea por línea los datos de matriculas.csv en la BD
+	 * Función que inserta línea por línea los datos de matriculas en la BD
 	 */
 	private static void cargarMatriculas() {
-		String path = "csv/matriculas.csv";
+		String path = "csv/matriculas_export.csv";
 		
 		CSVParser parser;
 		try {
