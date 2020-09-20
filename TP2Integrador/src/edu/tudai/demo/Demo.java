@@ -9,7 +9,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import edu.tudai.dao.i.*;
 import edu.tudai.pojo.*;
 
 
@@ -19,11 +18,11 @@ public class Demo {
 	public static void main(String[] args) {
 
 		cargarBD();
-		System.out.println(programa.getEstudiantesOrderByLastname());
-		System.out.println(programa.getEstudiantes());
-		Carrera c = Sistema.carreraDAO.findCarrera(3);
-		System.out.println(c);
-		System.out.println(programa.getEstudiantesByResidencia(c,"Olavarria"));
+		//System.out.println(programa.getEstudiantesOrderByLastname());
+		//System.out.println(programa.getEstudiantes());
+		//Carrera c = Sistema.carreraDAO.findCarrera(3);
+		//System.out.println(c);
+		//System.out.println(programa.getEstudiantesByResidencia(c,"Olavarria"));
 		
 		imprimirInformeInscriptosCarreras();
 	}
