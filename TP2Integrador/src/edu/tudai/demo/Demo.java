@@ -21,13 +21,10 @@ public class Demo {
 
 		cargarBD();
 		//System.out.println(programa.getEstudiantesOrderByLastname());
-		//System.out.println(programa.getEstudiantes());
 		//Carrera c = Sistema.carreraDAO.findCarrera(3);
-		//System.out.println(c);
-		//System.out.println(programa.getEstudiantesByResidencia(c,"Olavarria"));
-		
+		//imprimirEstudiantesByResidencia(c, "Olavarria");
 		//imprimirInformeInscriptosCarreras();
-		imprimirInformeCarrerasInscriptosPorAnio();
+		//imprimirInformeCarrerasInscriptosPorAnio();
 	}
 	
 	/**

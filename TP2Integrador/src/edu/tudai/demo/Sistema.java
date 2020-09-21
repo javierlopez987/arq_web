@@ -7,7 +7,6 @@ import java.util.List;
 
 import edu.tudai.dao.i.*;
 import edu.tudai.dao.jpa.*;
-import edu.tudai.filters.Filter;
 import edu.tudai.pojo.*;
 
 public class Sistema {
@@ -68,18 +67,6 @@ public class Sistema {
 	
 	public Matricula matricular(Estudiante e, Carrera c, int ano_ingreso) {
 		return c.matricular(e, ano_ingreso);
-	}
-	
-	public List<Estudiante> getEstudiantes(Filter f) {
-		List<Estudiante> result = new ArrayList<Estudiante>();
-		
-		for(Estudiante e: estudiantes) {
-			if(f.cumple(e)) {
-				result.add(e);
-			}
-		}
-		
-		return result;
 	}
 	
 	/**
