@@ -54,6 +54,29 @@ public class Demo {
 		}
 	}
 	
+	private static void imprimirEstudiantesByResidencia(Carrera c, String residencia) {
+		
+		List<Estudiante> estudiantes = programa.getEstudiantesByResidencia(c,residencia);
+		for(Estudiante e: estudiantes) {
+			System.out.println("------");
+			System.out.println(e);
+			System.out.println("De: "+residencia);
+			System.out.println("------");
+		}
+	}
+	
+	
+	private static void imprimirEstudiantesByGenero(String genero) {
+		
+		List<Estudiante> estudiantes = programa.getEstudiantesByGenero(genero);
+		for(Estudiante e: estudiantes) {
+			System.out.println("------");
+			System.out.println(e);
+			System.out.println("De: "+genero);
+			System.out.println("------");
+		}
+	}
+	
 	/**
 	 * Carga la información desde los csv hacia la BD
 	 */
