@@ -36,16 +36,7 @@ public class Demo {
 	 */
 	private static void imprimirInformeCarrerasInscriptosPorAnio() {
 		
-		List<Carrera> carreras = programa.getCarrerasInscriptosPorAnio();
-		for(Carrera c: carreras) {
-			System.out.println("------");
-			System.out.println(c);
-			Map<Integer, Integer> info = c.getInscriptosPorAnio();
-			for (Entry<Integer, Integer> e : info.entrySet()) {
-			    System.out.println("Año de ingreso " + e.getKey() + ": " + e.getValue() + " inscripciones");
-			}
-			System.out.println("------");
-		}
+		programa.imprimirCarrerasInscriptosPorAnio();
 	}
 	
 	/**

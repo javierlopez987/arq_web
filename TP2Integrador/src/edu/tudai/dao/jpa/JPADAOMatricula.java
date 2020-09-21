@@ -115,6 +115,26 @@ public class JPADAOMatricula implements DAOMatricula{
 		return result;
 	}
 	
-	
+	public Integer selectNroEgresados(Carrera c, Integer anio){
+		Integer result;
+		Long aux;
+		String jpql = "SELECT COUNT(m.cursada) "
+				+ "FROM Carrera c JOIN c.matriculas m "
+				+ "WHERE m.egreso = ?1 AND c = ?2 ";
+		
+		try {
+			Query query = em.createQuery(jpql);
+			query.setParameter(1, anio);
+			query.setParameter(2, c);
+			aux = (Long) query.getSingleResult();
+			result = aux.intValue();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			result = 0;
+		}
+		
+		return result;
+	}
 	
 }

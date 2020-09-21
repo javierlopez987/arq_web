@@ -146,14 +146,17 @@ public class Sistema {
 	}
 	
 	public void imprimirCarrerasInscriptosPorAnio() {
-		List<Carrera> result = new ArrayList<Carrera>();
 		List<Object[]> info = (List<Object[]>) ((JPADAOCarrera) carreraDAO).selectCarrerasInscriptosPorAnio();
 		for(Object[] o: info) {
 			Carrera c = (Carrera) o[0];
 			Long insc = (Long) o[1];
-			Integer ingreso = (Integer) o[2];
-			c.addInscriptosPorAnio(ingreso, insc.intValue());
-			result.add(c);
+			Integer anio = (Integer) o[2];
+			System.out.println("Carrera " + c.getTitulo());
+			System.out.println("Año " + anio);
+			System.out.println("Ingresos: " + insc.intValue());
+			Integer egresos = ((JPADAOMatricula) matriculaDAO).selectNroEgresados(c, anio);
+			if(egresos != 0)
+				System.out.println("Egresos: " + egresos);
 		}
 	}
 }
