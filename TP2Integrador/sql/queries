@@ -1,3 +1,4 @@
+--Inscriptos por carrera
 SELECT c.*, COUNT(c.id) AS insc
 FROM carrera c
 JOIN matricula m ON c.id = m.cursada_id
@@ -5,7 +6,7 @@ GROUP BY c.id
 ORDER BY insc DESC;
 
 --Ingreso
-SELECT c.*, m.ingreso AS ingreso, COUNT(c.id) AS insc
+SELECT c.*, COUNT(c.id) AS insc, m.ingreso AS ingreso
 FROM carrera c
 JOIN matricula m ON c.id = m.cursada_id
 GROUP BY c.id, m.ingreso

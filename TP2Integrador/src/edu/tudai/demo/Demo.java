@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -24,7 +26,26 @@ public class Demo {
 		//System.out.println(c);
 		//System.out.println(programa.getEstudiantesByResidencia(c,"Olavarria"));
 		
-		imprimirInformeInscriptosCarreras();
+		//imprimirInformeInscriptosCarreras();
+		imprimirInformeCarrerasInscriptosPorAnio();
+	}
+	
+	/**
+	 * Imprime carreras con estudiantes inscriptos, 
+	 * ordenadas por cantidad de inscriptos
+	 */
+	private static void imprimirInformeCarrerasInscriptosPorAnio() {
+		
+		List<Carrera> carreras = programa.getCarrerasInscriptosPorAnio();
+		for(Carrera c: carreras) {
+			System.out.println("------");
+			System.out.println(c);
+			Map<Integer, Integer> info = c.getInscriptosPorAnio();
+			for (Entry<Integer, Integer> e : info.entrySet()) {
+			    System.out.println("Año de ingreso " + e.getKey() + ": " + e.getValue() + " inscripciones");
+			}
+			System.out.println("------");
+		}
 	}
 	
 	/**

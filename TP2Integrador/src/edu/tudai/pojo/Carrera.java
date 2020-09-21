@@ -1,7 +1,9 @@
 package edu.tudai.pojo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,6 +30,8 @@ public class Carrera {
 	private List<Matricula> matriculas;
 	@Transient
 	private int inscriptos;
+	@Transient
+	private Map<Integer, Integer> inscriptosPorAnio;
 	
 	public Carrera() {
 		super();
@@ -74,6 +78,17 @@ public class Carrera {
 
 	public void setInscriptos(int inscriptos) {
 		this.inscriptos = inscriptos;
+	}
+	
+	public Map<Integer, Integer> getInscriptosPorAnio() {
+		return inscriptosPorAnio;
+	}
+
+	public void addInscriptosPorAnio(Integer anio, Integer inscriptos) {
+		if(this.inscriptosPorAnio == null) {
+			this.inscriptosPorAnio = new HashMap<Integer, Integer>();
+		}
+		this.inscriptosPorAnio.put(anio, inscriptos);
 	}
 
 	public List<Matricula> getMatriculas() {

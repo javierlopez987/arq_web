@@ -130,4 +130,30 @@ public class Sistema {
 		
 		return result;
 	}
+	
+	public List<Carrera> getCarrerasInscriptosPorAnio() {
+		List<Carrera> result = new ArrayList<Carrera>();
+		List<Object[]> info = (List<Object[]>) ((JPADAOCarrera) carreraDAO).selectCarrerasInscriptosPorAnio();
+		for(Object[] o: info) {
+			Carrera c = (Carrera) o[0];
+			Long insc = (Long) o[1];
+			Integer ingreso = (Integer) o[2];
+			c.addInscriptosPorAnio(ingreso, insc.intValue());
+			result.add(c);
+		}
+		
+		return result;
+	}
+	
+	public void imprimirCarrerasInscriptosPorAnio() {
+		List<Carrera> result = new ArrayList<Carrera>();
+		List<Object[]> info = (List<Object[]>) ((JPADAOCarrera) carreraDAO).selectCarrerasInscriptosPorAnio();
+		for(Object[] o: info) {
+			Carrera c = (Carrera) o[0];
+			Long insc = (Long) o[1];
+			Integer ingreso = (Integer) o[2];
+			c.addInscriptosPorAnio(ingreso, insc.intValue());
+			result.add(c);
+		}
+	}
 }
