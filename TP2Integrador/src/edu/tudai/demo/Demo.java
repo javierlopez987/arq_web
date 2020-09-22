@@ -2,11 +2,8 @@ package edu.tudai.demo;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -42,22 +39,22 @@ public class Demo {
 		imprimirInformeInscriptosCarreras();
 		
 		// g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
-		Carrera c = Sistema.carreraDAO.findCarrera(3);
-		imprimirEstudiantesByResidencia(c, "Olavarria");
+		Carrera c = Sistema.carreraDAO.findCarrera(16);
+		imprimirEstudiantesByResidencia(c, "Tandil");
 		
 		// 3) Generar un reporte de las carreras, que para cada carrera incluya información de los
 		// inscriptos y egresados por año. Se deben ordenar las carreras alfabéticamente, y presentar
 		// los años de manera cronológica.
-		imprimirInformeCarrerasInscriptosPorAnio();
+		imprimirCarrerasInscriptosEgresadosPorAnio();
 	}
 	
 	/**
 	 * Testea el servicio alta estudiante y lo imprime por pantalla si es exitoso.
 	 */
 	private static void altaEstudiante() {
-		Estudiante e = new Estudiante(2001, "Pedro", "Escamoso", 42, "Masculino", 26159267, "Tandil", 99999);
+		Estudiante e = new Estudiante(2100, "Pedro", "Escamoso", 42, "Masculino", 26159267, "Tandil", 99998);
 		programa.addEstudiante(e);
-		System.out.println(programa.getEstudiante(99999));
+		System.out.println(programa.getEstudiante(99998));
 	}
 	
 	private static void matricularEstudiante() {
@@ -76,14 +73,18 @@ public class Demo {
 	
 	private static void imprimirEstudianteLibreta(int nro_lu) {
 		Estudiante e = programa.getEstudiante(nro_lu);
+		System.out.println("------");
 		System.out.println(e);
+		System.out.println("Libreta Nro: " + e.getNro_lu());
 	}
 	
 	private static void imprimirEstudiantesGeneroMasculino() {
 		List<Estudiante> estudiantes = programa.getEstudiantesByGenero("Masculino");
 
 		for(Estudiante e: estudiantes) {
+			System.out.println("------");
 			System.out.println(e);
+			System.out.println("Genero: " + e.getGenero());
 		}
 		
 	}
@@ -92,9 +93,9 @@ public class Demo {
 	 * Imprime carreras con estudiantes inscriptos, 
 	 * ordenadas por cantidad de inscriptos
 	 */
-	private static void imprimirInformeCarrerasInscriptosPorAnio() {
+	private static void imprimirCarrerasInscriptosEgresadosPorAnio() {
 		
-		programa.imprimirCarrerasInscriptosPorAnio();
+		programa.imprimirCarrerasInscriptosEgresadosPorAnio();
 	}
 	
 	/**
@@ -106,9 +107,8 @@ public class Demo {
 		List<Carrera> carreras = programa.getCarrerasConInscriptos();
 		for(Carrera c: carreras) {
 			System.out.println("------");
-			System.out.println(c);
-			System.out.println("Inscriptos: " + c.getCantInscriptos());
-			System.out.println("------");
+			System.out.println(c.getTitulo());
+			System.out.println("Total de inscriptos: " + c.getCantInscriptos());
 		}
 	}
 	
@@ -118,20 +118,7 @@ public class Demo {
 		for(Estudiante e: estudiantes) {
 			System.out.println("------");
 			System.out.println(e);
-			System.out.println("De: "+residencia);
-			System.out.println("------");
-		}
-	}
-	
-	
-	private static void imprimirEstudiantesByGenero(String genero) {
-		
-		List<Estudiante> estudiantes = programa.getEstudiantesByGenero(genero);
-		for(Estudiante e: estudiantes) {
-			System.out.println("------");
-			System.out.println(e);
-			System.out.println("De: "+genero);
-			System.out.println("------");
+			System.out.println("Ciudad de residencia: "+residencia);
 		}
 	}
 	

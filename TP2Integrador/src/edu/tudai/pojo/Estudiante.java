@@ -134,8 +134,7 @@ public class Estudiante implements Comparable<Estudiante>{
 	
 	@Override
 	public String toString() {
-		return "Estudiante [id_estudiante=" + id + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", edad=" + edad + ", genero=" + genero + ", dni=" + dni + ", residencia=" + residencia + ", nro_lu="
+		return apellido + ", " + nombre + " [edad=" + edad + ", genero=" + genero + ", dni=" + dni + ", residencia=" + residencia + ", nro_lu="
 				+ nro_lu + "]";
 	}
 

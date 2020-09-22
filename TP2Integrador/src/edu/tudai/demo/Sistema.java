@@ -136,18 +136,26 @@ public class Sistema {
 		return result;
 	}
 	
-	public void imprimirCarrerasInscriptosPorAnio() {
+	public void imprimirCarrerasInscriptosEgresadosPorAnio() {
 		List<Object[]> info = (List<Object[]>) ((JPADAOCarrera) carreraDAO).selectCarrerasInscriptosPorAnio();
+		Carrera ctrl = null;
 		for(Object[] o: info) {
 			Carrera c = (Carrera) o[0];
 			Long insc = (Long) o[1];
 			Integer anio = (Integer) o[2];
-			System.out.println("Carrera " + c.getTitulo());
-			System.out.println("Año " + anio);
-			System.out.println("Ingresos: " + insc.intValue());
+			if(ctrl != c) {
+				System.out.println("---");
+				System.out.println("Carrera " + c.getTitulo());
+				ctrl = c;
+			}
+			System.out.print("Año " + anio);
+			System.out.print(" Inscriptos: " + insc.intValue());
 			Integer egresos = ((JPADAOMatricula) matriculaDAO).selectNroEgresados(c, anio);
-			if(egresos != 0)
-				System.out.println("Egresos: " + egresos);
+			if(egresos != 0) {
+				System.out.println(" Egresados: " + egresos);
+			} else {
+				System.out.println();
+			}
 		}
 	}
 }

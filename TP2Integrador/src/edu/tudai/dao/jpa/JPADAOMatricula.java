@@ -2,7 +2,6 @@ package edu.tudai.dao.jpa;
 
 import java.util.Collection;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
