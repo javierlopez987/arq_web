@@ -2,6 +2,7 @@ package edu.tudai.demo;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +19,73 @@ public class Demo {
 	private static Sistema programa =  new Sistema();
 	
 	public static void main(String[] args) {
-
+		
+		// El conjunto de datos iniciales para la base de datos se cargará desde un archivo CSV.
 		cargarBD();
-		//System.out.println(programa.getEstudiantesOrderByLastname());
-		//Carrera c = Sistema.carreraDAO.findCarrera(3);
-		//imprimirEstudiantesByResidencia(c, "Olavarria");
-		//imprimirInformeInscriptosCarreras();
-		//imprimirInformeCarrerasInscriptosPorAnio();
+		
+		// a) dar de alta un estudiante
+		altaEstudiante();
+		
+		// b) matricular un estudiante en una carrera
+		matricularEstudiante();
+		
+		// c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
+		imprimirEstudiantesPorApellido();
+		
+		// d) recuperar un estudiante, en base a su número de libreta universitaria.
+		imprimirEstudianteLibreta(45455);
+		
+		// e) recuperar todos los estudiantes, en base a su género.
+		imprimirEstudiantesGeneroMasculino();
+		
+		// f) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
+		imprimirInformeInscriptosCarreras();
+		
+		// g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
+		Carrera c = Sistema.carreraDAO.findCarrera(3);
+		imprimirEstudiantesByResidencia(c, "Olavarria");
+		
+		// 3) Generar un reporte de las carreras, que para cada carrera incluya información de los
+		// inscriptos y egresados por año. Se deben ordenar las carreras alfabéticamente, y presentar
+		// los años de manera cronológica.
+		imprimirInformeCarrerasInscriptosPorAnio();
+	}
+	
+	/**
+	 * Testea el servicio alta estudiante y lo imprime por pantalla si es exitoso.
+	 */
+	private static void altaEstudiante() {
+		Estudiante e = new Estudiante(2001, "Pedro", "Escamoso", 42, "Masculino", 26159267, "Tandil", 99999);
+		programa.addEstudiante(e);
+		System.out.println(programa.getEstudiante(99999));
+	}
+	
+	private static void matricularEstudiante() {
+		Estudiante e = programa.getEstudiante(45455);
+		Carrera c = programa.getCarrera(3);
+		Matricula m = programa.matricular(e, c, 2020);
+		System.out.println(m);
+	}
+	
+	private static void imprimirEstudiantesPorApellido() {
+		List<Estudiante> estudiantes = programa.getEstudiantesOrderByLastname();
+		for(Estudiante e: estudiantes) {
+			System.out.println(e);
+		}
+	}
+	
+	private static void imprimirEstudianteLibreta(int nro_lu) {
+		Estudiante e = programa.getEstudiante(nro_lu);
+		System.out.println(e);
+	}
+	
+	private static void imprimirEstudiantesGeneroMasculino() {
+		List<Estudiante> estudiantes = programa.getEstudiantesByGenero("Masculino");
+
+		for(Estudiante e: estudiantes) {
+			System.out.println(e);
+		}
+		
 	}
 	
 	/**

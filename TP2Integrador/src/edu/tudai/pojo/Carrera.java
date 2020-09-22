@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import edu.tudai.demo.Sistema;
+
 @Entity
 public class Carrera {
 	@Id
@@ -99,7 +101,8 @@ public class Carrera {
 	public Matricula matricular(Estudiante e, int ingreso) {
 		Matricula nueva = new Matricula(ingreso, e, this);
 		if(!matriculas.contains(nueva)) {
-			matriculas.add(nueva);			
+			Sistema.matriculaDAO.insertMatricula(nueva);
+			matriculas.add(nueva);	
 		} else {
 			nueva = null;
 		}

@@ -68,8 +68,8 @@ public class Matricula {
 	}
 	@Override
 	public String toString() {
-		return "Matricula [id_matricula=" + id_matricula + ", ingreso=" + ingreso + ", alumno=" + alumno + ", cursada="
-				+ cursada + ", egreso=" + egreso + "]";
+		return "Matricula [alumno=" + alumno + ", cursada="
+				+ cursada + ", ingreso=" + ingreso + ", egreso=" + egreso + "]";
 	}
 	@Override
 	public int hashCode() {

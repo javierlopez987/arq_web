@@ -65,6 +65,10 @@ public class Sistema {
 		return success;
 	}
 	
+	public Carrera getCarrera(int id) {
+		return carreraDAO.findCarrera(id);
+	}
+	
 	public Matricula matricular(Estudiante e, Carrera c, int ano_ingreso) {
 		return c.matricular(e, ano_ingreso);
 	}
